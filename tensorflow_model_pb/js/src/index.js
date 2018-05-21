@@ -45,6 +45,7 @@ function RGBtoBGR(img,dimension){
         imgBGR.data[i+3] = 255;
     }
     ctx2.putImageData(imgBGR, 0, 0);
+    blurCanvas(canv2,ctx2);
 
     let bgrImage=new Image();
     bgrImage.onload=function(){
@@ -55,15 +56,21 @@ function RGBtoBGR(img,dimension){
     bgrImage.id="bgrImage";
 }
 
+function blurCanvas(c,ctx) {
+    ctx.globalAlpha = 0.2;
+    var offset = 2;
+    for (var i=1; i<=8; i+=1) {
+        ctx.drawImage(c, offset, 0, c.width - offset, c.height, 0, 0, c.width-offset, c.height);
+        ctx.drawImage(c, 0, offset, c.width, c.height - offset, 0, 0,c.width, c.height-offset);
+    }
+};
+
 const flower = document.getElementById('flower');
 window.onload = async () => {
 
     RGBtoBGR(flower,227);
 
     const resultElement = document.getElementById('result');
-
-    console.log("MobileNet");
-    resultElement.innerText = 'Loading MobileNet...';
 
     const mobileNet = new ModelLoader();
     console.time('Loading of model');
@@ -73,7 +80,7 @@ window.onload = async () => {
     const pixels = tfc.fromPixels(document.getElementById('bgrImage'));
 
     console.time('First prediction');
-    let result = mobileNet.predict(pixels);
+    let result = await mobileNet.predict(pixels);
     const topK = mobileNet.getTopKClasses(result, 5);
     console.timeEnd('First prediction');
 
@@ -81,11 +88,6 @@ window.onload = async () => {
     topK.forEach(x => {
         resultElement.innerText += `${x.value.toFixed(3)}: ${x.label}\n`;
     });
-
-    console.time('Subsequent predictions');
-    result = mobileNet.predict(pixels);
-    mobileNet.getTopKClasses(result, 5);
-    console.timeEnd('Subsequent predictions');
 
     mobileNet.dispose();
 };

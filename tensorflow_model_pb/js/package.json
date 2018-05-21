@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "start": "parcel --no-hmr --open src/index.html",
-    "build": "parcel build src/index.js"
+    "build": "parcel build src/index.html -d public --public-url ./"
   },
   "dependencies": {
     "@tensorflow/tfjs-converter": "0.3.1",

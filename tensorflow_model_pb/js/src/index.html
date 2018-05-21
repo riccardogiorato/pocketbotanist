@@ -8,14 +8,24 @@
         margin-top: 50px;
         margin-left: 50px;
     }
+
+    img{
+        display:none;
+    }
+
+    .loadingImg{
+        display: block;
+    }
 </style>
 
 <body>
     <h1>TensorFlow.js convert Frozen Model test</h1>
-    <img id="flower" src="../assets/flower.jpg" />
+    <img id="flower" src="../assets/flower.jpg"/>
     <h2>Result:</h2>
-    <div id="result"></div>
+    <div id="result">
+        Loading...
+    </div>
 </body>
-<script src="index.js"></script>
+<script src="./index.js"></script>
 
 </html>

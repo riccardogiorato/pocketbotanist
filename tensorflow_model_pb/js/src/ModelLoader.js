@@ -20,6 +20,9 @@ export class ModelLoader {
             CURRENT_ASSETS_DIR + WEIGHT_MANIFEST_FILE_URL);
     }
 
+    /**
+     * dispose the model from memory when not needed anymore
+     */
     dispose() {
         if (this.model) {
             this.model.dispose();

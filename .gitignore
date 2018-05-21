@@ -1,6 +1,6 @@
 # JS project modules
 tensorflow_model_pb/js/node_modules/
-tensorflow_model_pb/js/dist/
+tensorflow_model_pb/js/public/
 
 
 # Webstorm
