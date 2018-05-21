@@ -1,37 +1,55 @@
 # Project V2 - Cognitive Services
 
-**Deadline?**
+**Deadline:** from 3-8 of July 2018
 
-* during the exams period?
+**Weekly plan - TODO:**
 
-**Pipeline:**
+<table class="tg">
+  <tr>
+    <th class="tg-us36">week</th>
+    <th class="tg-us36"><br>list of task of that week</th>
+  </tr>
+  <tr>
+    <td class="tg-us36">1</td>
+    <td class="tg-us36">select an already built dataset
+    <br> manually clean extreme classes<br>classify with general model Clarifai (clarifai.com)<br></td>
+  </tr>
+  <tr>
+    <td class="tg-us36">2</td>
+    <td class="tg-us36">classify using Custom Vision Microsoft(customvision.ai) or VM<br>
+    export the PB model from VM<br>
+    construct a function that loads an image base64 and give the related predicted class or class index<br>
+    test accuracy with testing dataset<br><br></td>
+  </tr>
+  <tr>
+    <td class="tg-us36">3</td>
+    <td class="tg-us36">generate slight variations to all images<br>
+    repeat previous steps and compare results<br></td>
+  </tr>
+  <tr>
+    <td class="tg-us36">4</td>
+    <td class="tg-us36">serve the tensorflow model with a Serverless solution -&gt; Algorithmia.com or Google Cloud Functions or AWS Lambda<br></td>
+  </tr>
+  <tr>
+    <td class="tg-us36">5</td>
+    <td class="tg-us36">build a vue single page application that load webcam, camera and let user take photos of flowers</td>
+  </tr>
+  <tr>
+    <td class="tg-us36">6</td>
+    <td class="tg-us36">create automated script to train again Custom Vision Microsoft with user submitted photos</td>
+  </tr>
+</table>
 
-1.  acquire data, clean
-2.  load or find features manually to classify
-3.  visualize image features for each image to check it's working in a right way
-4.  build visual vocabolary with quantity of features for each image
+**Extra goals:**
 
-**TODO:**
-
-1.  select an already built datasets, clean manually fast from possible errors
-2.  classify with general model Clarifai (clarifai.com)
-3.  classify using Custom Vision Microsoft(customvision.ai) or VM
-4.  export the PB model from VM
-5.  construct a function that loads an image base64 and give the related predicted class or class index
-6.  test accuracy with testing dataset
-7.  generate slight variations to all images, repeat steps 3-4 and compare obtained model
-8.  train this last one with variations of the image to get better weights and --less error, ++more recall
-9.  serve the tensorflow model with a Serverless solution -> Algorithmia.com or Google Cloud Functions or AWS Lambda
-10. understand which kind of model the microsoft team is using to make fast building models in customvision
-
-**Possible goals:**
-
-* understanding more the model horizontally too from Tensorboard
-  * to run Tensorboard run 'tensorboard --logdir=./log', url (http://asus-ux310gio:6006/#graphs&run=.)
-* might be usefuel to use a GAN or randomize images
+* test GAN to randomize images of specific types
 * turn all images to black and white to remove bias?
 * port Tensorflow model to JS version https://github.com/tensorflow/tfjs-converter
-    * first convert pb to Saved Model with ckpt and meta, is it possible?
+
+  * first convert pb to Saved Model with ckpt and meta, is it possible?
+* understanding more the model with Tensorboard
+  * to run Tensorboard run 'tensorboard --logdir=./log', url (http://asus-ux310gio:6006/#graphs&run=.)
+* understand which kind of model the microsoft team is using to build models fast in customvision
 * look at Modeldepot
 * classify with Tensorflow model built with Lobe
 
