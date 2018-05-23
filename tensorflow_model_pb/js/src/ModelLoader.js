@@ -43,6 +43,10 @@ export class ModelLoader {
             {[INPUT_NODE_NAME]:reshapedInput}, OUTPUT_NODE_NAME);
     }
 
+    getFoundClasse(predictions){
+        return this.getTopKClasses(predictions,1);
+    }
+
     getTopKClasses(predictions, topK) {
         const values = predictions.dataSync();
         predictions.dispose();

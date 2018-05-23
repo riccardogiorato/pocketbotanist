@@ -1,6 +1,6 @@
 import * as tfc from '@tensorflow/tfjs-core';
 import {ModelLoader} from './ModelLoader';
-
+import {PredictClarifai} from './PredictClarifai';
 
 function resizeImg(img,dimension){
     let c=document.createElement('canvas');
@@ -27,6 +27,15 @@ function RGBtoBGR(img,dimension){
     c.height=dimension;
     let ctx=c.getContext("2d");
     let base64mini =resizeImg(img,dimension);
+
+    // call clarifai general model
+    const clarifai = new PredictClarifai();
+    // get only base64 without prefix
+    const base64img = base64mini.toDataURL().substring(22);
+    // predict with clarifai API
+    clarifai.predict(base64img);
+
+
     ctx.drawImage(base64mini, 0, 0);
     const imgData = ctx.getImageData(0, 0, c.width, c.height);
 
@@ -81,7 +90,7 @@ window.onload = async () => {
 
     console.time('First prediction');
     let result = await mobileNet.predict(pixels);
-    const topK = mobileNet.getTopKClasses(result, 5);
+    const topK = mobileNet.getFoundClasse(result);
     console.timeEnd('First prediction');
 
     resultElement.innerText = '';

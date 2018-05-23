@@ -1,11 +1,15 @@
 {
+  "name":"yourpocketbotanist",
   "version": "0.0.1",
+  "title": "your Pocket botanist",
+  "homepage": "",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "scripts": {
     "start": "parcel --no-hmr --open src/index.html",
-    "build": "parcel build src/index.html -d public --public-url ./"
+    "build": "parcel build src/index.html -d public --public-url ./",
+    "clean": "RD /S /Q dist && RD /S /Q public && RD /S /Q .cache"
   },
   "dependencies": {
     "@tensorflow/tfjs-converter": "0.3.1",
@@ -14,6 +18,7 @@
     "babel-polyfill": "~6.26.0",
     "babel-preset-env": "~1.6.1",
     "clang-format": "~1.2.2",
+    "clarifai": "^2.7.1",
     "parcel-bundler": "~1.6.2"
   }
 }

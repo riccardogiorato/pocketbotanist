@@ -1,4 +1,6 @@
-# Project V2 - Cognitive Services
+# Project : “your Pocket botanist”
+
+## Cognitive Services @unipd
 
 **Deadline:** from 3-8 of July 2018
 
@@ -11,8 +13,11 @@
   </tr>
   <tr>
     <td class="tg-us36">1</td>
-    <td class="tg-us36">select an already built dataset
-    <br> manually clean extreme classes<br>classify with general model Clarifai (clarifai.com)<br></td>
+    <td class="tg-us36">
+    select an already built dataset<br>
+    manually clean extreme classes<br>
+    classify with general model Clarifai (clarifai.com)<br>
+    </td>
   </tr>
   <tr>
     <td class="tg-us36">2</td>
@@ -47,6 +52,7 @@
 * port Tensorflow model to JS version https://github.com/tensorflow/tfjs-converter
 
   * first convert pb to Saved Model with ckpt and meta, is it possible?
+
 * understanding more the model with Tensorboard
   * to run Tensorboard run 'tensorboard --logdir=./log', url (http://asus-ux310gio:6006/#graphs&run=.)
 * understand which kind of model the microsoft team is using to build models fast in customvision

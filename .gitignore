@@ -1,7 +1,7 @@
 # JS project modules
 tensorflow_model_pb/js/node_modules/
 tensorflow_model_pb/js/public/
-
+tensorflow_model_pb/js/.cache/
 
 # Webstorm
 .idea/
