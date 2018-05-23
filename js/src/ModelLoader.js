@@ -3,7 +3,7 @@ import {loadFrozenModel} from "@tensorflow/tfjs-converter/dist/executor/frozen_m
 import {IMAGE_CLASSES} from './classes';
 
 const CURRENT_ASSETS_DIR =
-    'http://127.0.0.1/edsa-github/cognitive_services/tensorflow_model_pb/js/assets/';
+    'http://127.0.0.1/edsa-github/cognitive_services/js/assets/';
 
 const MODEL_FILE_URL = 'tensorflowjs_model.pb';
 const WEIGHT_MANIFEST_FILE_URL = 'weights_manifest.json';

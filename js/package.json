@@ -2,14 +2,14 @@
   "name":"yourpocketbotanist",
   "version": "0.0.1",
   "title": "your Pocket botanist",
-  "homepage": "",
+  "homepage": "http://pocketbotanist.ml",
   "main": "index.js",
   "license": "MIT",
   "private": true,
   "scripts": {
     "start": "parcel --no-hmr --open src/index.html",
     "build": "parcel build src/index.html -d public --public-url ./",
-    "clean": "RD /S /Q dist && RD /S /Q public && RD /S /Q .cache"
+    "clean": "RMDIR  dist /S /Q && RMDIR  public /S /Q && RMDIR  .cache /S /Q"
   },
   "dependencies": {
     "@tensorflow/tfjs-converter": "0.3.1",

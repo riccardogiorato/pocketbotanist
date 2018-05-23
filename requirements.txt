@@ -1,0 +1,4 @@
+# packages for python scripts
+clarifai
+tensorflow
+tensorflowjs

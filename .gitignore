@@ -1,10 +1,19 @@
 # JS project modules
-tensorflow_model_pb/js/node_modules/
-tensorflow_model_pb/js/public/
-tensorflow_model_pb/js/.cache/
+node_modules/
+js/node_modules/
+js/public/
+js/.cache/
 
 # Webstorm
 .idea/
+
+# Docsaurs
+website/translated_docs
+website/build/
+website/yarn.lock
+website/node_modules
+website/i18n/*
+!website/i18n/en.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
