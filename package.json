@@ -17,7 +17,7 @@
   "scripts": {
     "docs": "cd website && yarn start",
     "js": "cd js && yarn start",
-    "python": "pip install requiriments.txt",
+    "python": "cd python && pip install requiriments.txt",
     "docsbuild": "cd website && yarn run build"
 
   },
