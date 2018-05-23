@@ -9,21 +9,39 @@
         margin-left: 50px;
     }
 
-    img{
-        max-width: 400px;
+    img {
+        max-width: 100%;
+        width: 400px;
     }
 
-    .loadingImg{
-        display: block;
+    .loader {
+        border: 16px solid #f3f3f3;
+        /* Light grey */
+        border-top: 16px solid green;
+        /* Blue */
+        border-radius: 50%;
+        width: 150px;
+        height: 150px;
+        animation: spin 2s linear infinite;
+    }
+
+    @keyframes spin {
+        0% {
+            transform: rotate(0deg);
+        }
+        100% {
+            transform: rotate(360deg);
+        }
     }
 </style>
 
 <body>
     <h1>TensorFlow.js convert Frozen Model test</h1>
-    <img id="flower" src="../assets/flower.jpg"/>
-    <h2>Result:</h2>
-    <div id="result">
-        Loading...
+    <img id="flower" src="../assets/flower.jpg" />
+    <div id="results">
+        <div id="resultsSpinn" class="loader"></div>
+        <div id="resultC"></div>
+        <div id="resultT"></div>
     </div>
 </body>
 <script src="./index.js"></script>
