@@ -3,7 +3,7 @@ import {loadFrozenModel} from "@tensorflow/tfjs-converter/dist/executor/frozen_m
 import {IMAGE_CLASSES} from './classes';
 
 const CURRENT_ASSETS_DIR =
-    'http://pocketbotanist-models.netlify.com';
+    'http://pocketbotanist-models.netlify.com/';
 
 const MODEL_FILE_URL = 'tensorflowjs_model.pb';
 const WEIGHT_MANIFEST_FILE_URL = 'weights_manifest.json';
