@@ -1,5 +1,11 @@
 const Clarifai = require("clarifai");
-
+/**
+ * This class predict content of an image with 
+ * general clarifai model, telling if it found a flower
+ * 
+ * @export
+ * @class PredictClarifai
+ */
 export class PredictClarifai {
   /**
    * construct a clarifai app

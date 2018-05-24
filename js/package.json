@@ -1,5 +1,5 @@
 {
-  "name":"yourpocketbotanist",
+  "name": "yourpocketbotanist",
   "version": "0.0.1",
   "title": "your Pocket botanist",
   "homepage": "http://pocketbotanist.ml",
@@ -16,9 +16,14 @@
     "@tensorflow/tfjs-core": "0.10.0",
     "babel-plugin-transform-runtime": "~6.23.0",
     "babel-polyfill": "~6.26.0",
-    "babel-preset-env": "~1.6.1",
+    "babel-preset-env": "^1.7.0",
     "clang-format": "~1.2.2",
     "clarifai": "^2.7.1",
-    "parcel-bundler": "~1.6.2"
+    "parcel-bundler": "^1.8.1",
+    "vue": "^2.5.16"
+  },
+  "devDependencies": {
+    "@vue/component-compiler-utils": "^1.3.0",
+    "parcel-plugin-vue": "^1.5.0"
   }
 }

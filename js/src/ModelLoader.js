@@ -2,7 +2,7 @@ import * as tfc from "@tensorflow/tfjs-core";
 import { loadFrozenModel } from "@tensorflow/tfjs-converter/dist/executor/frozen_model";
 import { IMAGE_CLASSES } from "./classes";
 
-const CURRENT_ASSETS_DIR = "http://pocketbotanist-models.netlify.com/";
+const CURRENT_ASSETS_DIR = "https://models.pocketbotanist.ml/";
 
 const MODEL_FILE_URL = "tensorflowjs_model.pb";
 const WEIGHT_MANIFEST_FILE_URL = "weights_manifest.json";
@@ -10,8 +10,16 @@ const INPUT_NODE_NAME = "Placeholder";
 const OUTPUT_NODE_NAME = "loss";
 const PREPROCESS_DIVISOR = tfc.scalar(255 / 2);
 
+/**
+ * This class loads your custom frozen tensorflow model
+ * just pass the model remote location and names for input and output nodes
+ * @export
+ * @class ModelLoader
+ */
 export class ModelLoader {
-  constructor() {}
+  constructor() {
+
+  }
 
   /**
    * load the remote tensorflow model and weight
