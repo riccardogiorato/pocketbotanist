@@ -19,11 +19,9 @@
     "babel-preset-env": "^1.7.0",
     "clang-format": "~1.2.2",
     "clarifai": "^2.7.1",
-    "parcel-bundler": "^1.8.1",
     "vue": "^2.5.16"
   },
   "devDependencies": {
-    "@vue/component-compiler-utils": "^1.3.0",
-    "parcel-plugin-vue": "^1.5.0"
+    "parcel-bundler": "^1.8.1"
   }
 }

@@ -1,4 +1,5 @@
-const Clarifai = require("clarifai");
+const Clarifai = require('clarifai');
+
 /**
  * This class predict content of an image with 
  * general clarifai model, telling if it found a flower
