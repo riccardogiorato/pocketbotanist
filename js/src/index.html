@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Your Pocket Botanist</title>
-    <meta name="viewport" content="width=device-width">
+    <meta content="width=device-width,initial-scale=1,minimal-ui" name="viewport">
     <meta property="og:title" content="Your Pocket Botanist">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://pocketbotanist.ml/">
@@ -13,14 +13,11 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:image" content="../../design/logo.jpg">
     <link rel="shortcut icon" href="../../design/logo.jpg">
-    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
-    <script type="text/javascript" src="https://buttons.github.io/buttons.js"></script>
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
 </head>
 <style>
     body {
         font-family: "Roboto", "Helvetica", "Arial", sans-serif;
-        margin-top: 50px;
-        margin-left: 50px;
     }
 
     img {
@@ -50,14 +47,7 @@
 </style>
 
 <body>
-    <h1>Your Pocket Botanist</h1>
-    <h2>TensorFlow.js convert Frozen Model test</h2>
-    <img id="flower" src="../assets/flower.jpg" />
-    <div id="results">
-        <div id="resultsSpinn" class="loader"></div>
-        <div id="resultC"></div>
-        <div id="resultT"></div>
-    </div>
+    <div id="app"></div>
 </body>
 <script src="./index.js"></script>
 
