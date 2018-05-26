@@ -3754,7 +3754,13 @@ vue-template-es2015-compiler@^1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.6.0.tgz#dc42697133302ce3017524356a6c61b7b69b4a18"
 
-vue@^2.5.16:
+vue-web-cam@1.0.2:
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/vue-web-cam/-/vue-web-cam-1.0.2.tgz#f42dae467c4c011d0eec6787afefbecf2c7a40ca"
+  dependencies:
+    vue "^2.0.1"
+
+vue@^2.0.1, vue@^2.5.16:
   version "2.5.16"
   resolved "https://registry.yarnpkg.com/vue/-/vue-2.5.16.tgz#07edb75e8412aaeed871ebafa99f4672584a0085"
 

@@ -106,29 +106,7 @@ function blurCanvas(c, ctx) {
   }
 }
 
-/**
- * predict the class with remote clarifia model
- * @param {*} img image to predict on
- */
-async function predictClarifai(img) {
-  console.time("Clarifai");
-  // call clarifai general model
-  const clarifai = new PredictClarifai();
-  // get only base64 without prefix
-  const base64img = img.toDataURL().substring(22);
-  // predict with clarifai API
-  const found = await clarifai.isThereAFlower(base64img);
-  if (found)
-    return "There's a flower!";
-  else 
-    return "<h3>There'snt a flower!</h3>";
-    
-    //stopLoading();
 
-  console.log("ended waiting!");
-
-  console.timeEnd("Clarifai");
-}
 
 function stopLoading(){
     resultsSpinn.style.display = 'none';

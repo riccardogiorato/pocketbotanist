@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import Webcam from 'vue-web-cam/src/webcam';
+import Webcam from './Webcam';
 import AnalyzePhoto from './AnalyzePhoto';
 
 export default {
