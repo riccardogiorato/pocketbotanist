@@ -1,11 +1,7 @@
 <template>
     <div id="webcam-view">
-        <div class="select">
-            <label for="videoSource">Video source: </label>
-            <select id="videoSources">@change="handleChange"
-                <option v-for="selectValue in cameras" :key="selectValue.code" :value="selectValue.code">{{ selectValue.name }}</option>
-            </select>
-        </div>
+  <button v-on:click="changeCamera">Change camera</button>
+  <p>Chosen camera n. {{selectedCamera+1}} out of {{ cameras.length }}</p>
         <video ref="video" v-bind:width="width" v-bind:height="height" :src="this.source" autoplay="true"></video>
     </div>  
 </template>
@@ -14,6 +10,7 @@
 export default {
     data () {
         return {
+            selectedCamera: 0,
             stream: '',
             source: '',
             canvas: null,
@@ -76,31 +73,41 @@ if (navigator.mediaDevices.getUserMedia === undefined) {
   }
 }
 
-//console.dir(this.cameras.child(0));
-
-const that = this;
-
-
-//navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: "EFWjQzJg08sJdkgrFGsr1zxWiCyxrTt0PBkmcagnHnQ=" } } })
-navigator.mediaDevices.getUserMedia({ video: true })
-.then(function(stream) {
-  if ("srcObject" in that.getVideoObj()) {
-    that.getVideoObj().srcObject = stream;
-  } else {//old broswers
-    that.source = window.URL.createObjectURL(stream);
-  }
-  that.stream = stream;
-})
-.catch(function(err) {
-  console.log(err.name + ": " + err.message);
-});
-
-
+this.loadCamera();
 
     },
     methods: {
         getVideoObj(){
             return this.$refs.video;
+        },
+        changeCamera(){
+            this.selectedCamera +=1;
+            if(this.selectedCamera >= this.cameras.length)
+                this.selectedCamera = 0;
+            this.loadCamera();
+        },
+        loadCamera(cameraCode = null){
+            const that = this;
+            
+            function loadSrcStream(stream){
+                if ("srcObject" in that.getVideoObj()) {
+                    that.getVideoObj().srcObject = stream;
+                } else {//old broswers
+                    that.source = window.URL.createObjectURL(stream);
+                }
+            }
+
+            if(cameraCode === null)
+                navigator.mediaDevices.getUserMedia({ video: true }).then(stream =>loadSrcStream(stream))
+                .catch(function(err) {
+                console.log(err.name + ": " + err.message);
+                });
+            else
+            navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: this.$cameras[this.selectedCamera].code } } })
+            .then(stream => loadSrcStream(stream))
+            .catch(function(err) {
+            console.log(err.name + ": " + err.message);
+            });
         },
         hasMedia() {
             return !!this.getMedia();

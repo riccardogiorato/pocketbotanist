@@ -15,7 +15,7 @@ import AnalyzePhoto from './AnalyzePhoto';
 export default {
   data: function() {
     return {
-      windowHeight: window.innerHeight,
+      windowHeight: window.innerHeight/2,
       windowWidth:  window.innerWidth
     }
   },

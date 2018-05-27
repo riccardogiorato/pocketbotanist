@@ -1,10 +1,12 @@
 <template>
     <div>
-        <img id="flower" v-bind:src="imgSrc" />
+        <img id="flower" class="takenImage" v-bind:src="imgSrc" />
         <div id="results">
-            <div id="resultsSpinn" class="loader"></div>
-            <div id="resultC"></div>
-            <div id="resultT"></div>
+        </div>
+        <div v-if="loading" id="resultsSpinn" class="loader"></div>
+        <div v-else >
+          <p v-html="flowerClass"></p>
+          <p v-html="flowerFoundClarifai"></p>
         </div>
     </div>
 </template>
@@ -19,18 +21,42 @@ export default {
   name: "AnalyzePhoto",
   data() {
     return {
-      imgSrc: null
+      loading: false,
+      imgSrc: null,
+      flowerFoundClarifai: "",
+      flowerClass: "",
+      tensorflowLocal: new ModelLoader()
     };
   },
   methods: {
-    tookPhoto: function(valueImg) {
+    tookPhoto: async function(valueImg) {
       this.imgSrc = valueImg;
       var img = new Image();
-      img.src= this.imgSrc;
+      img.src = this.imgSrc;
       const ResizedImage = resizeImg(img, network_width);
-      (async () => { console.log(await predictClarifai(ResizedImage)) });
-      //const flowerFoundClarifai = predictClarifai(ResizedImage);
-      //console.log("CLARIFAI:",flowerFoundClarifai);
+
+      this.loading = true;
+      this.flowerFoundClarifai = await predictClarifai(ResizedImage);
+      this.flowerClass = await this.predictLocalTensorflow(ResizedImage);
+      this.loading = false;
+    },
+    /**
+     * predict the class with local tensorflow
+     * @param {*} img image to predict on
+     */
+    predictLocalTensorflow: async function(img) {
+      const BGRImage = this.tensorflowLocal.RGBtoBGR(img, network_width);
+
+      await this.tensorflowLocal.load();
+
+      const pixels = tfc.fromPixels(BGRImage);
+
+      let result = await this.tensorflowLocal.predict(pixels);
+      await tfc.nextFrame();
+      const topK = this.tensorflowLocal.getFoundClasse(result);
+
+      this.tensorflowLocal.dispose();
+      return "<h2>It's a " + topK[0].label + "</h2><br>";
     }
   }
 };
@@ -63,12 +89,7 @@ async function predictClarifai(img) {
   const base64img = img.toDataURL().substring(22);
   // predict with clarifai API
   const found = await clarifai.isThereAFlower(base64img);
-  if (found)
-    return "There's a flower!";
-  else 
-    return "<h3>There'snt a flower!</h3>";
-    
-    //stopLoading();
+  if (found) return "There's a flower here 🌺";
+  else return "<h3>There isn't a flower in the photo sorry...😢 </h3>";
 }
-
 </script>
