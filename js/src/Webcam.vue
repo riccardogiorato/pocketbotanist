@@ -3,10 +3,10 @@
         <div class="select">
             <label for="videoSource">Video source: </label>
             <select id="videoSources">@change="handleChange"
-                <option v-for="selectValue in cameras" :value="selectValue.code">{{ selectValue.name }}</option>
+                <option v-for="selectValue in cameras" :key="selectValue.code" :value="selectValue.code">{{ selectValue.name }}</option>
             </select>
         </div>
-        <video ref="video" v-bind:width="width" v-bind:height="height" v-bind:src="source" v-bind:autoplay="true"></video>
+        <video ref="video" v-bind:width="width" v-bind:height="height" :src="this.source" autoplay="true"></video>
     </div>  
 </template>
 
@@ -44,33 +44,72 @@ export default {
             return;
         }
 
-        this.getMedia().enumerateDevices().then(deviceInfos =>{
+        navigator.mediaDevices.enumerateDevices().then(deviceInfos =>{
             for (var i = 0; i !== deviceInfos.length; ++i) {
                 var deviceInfo = deviceInfos[i];
                 if (deviceInfo.kind === 'videoinput') {
                     this.cameras.push({name: deviceInfo.label || 'camera ' +
-                    (this.cameras.length + 1), code: i});
+                    (this.cameras.length + 1), code: deviceInfo.deviceId});
                 }//videoinput
             }//for videoinputs
         }//lambda function
         );
 
-        if (this.cameras.length != 0) {
-            this.getMedia().getUserMedia({ video: {exact: 1} }, stream => {
-            this.source = stream;
-            this.stream = stream;
-            this.$emit('started', stream);
-        }, error => {
-            this.$emit('error', error);
-          });
-        }
+// Older browsers might not implement mediaDevices at all, so we set an empty object first
+if (navigator.mediaDevices === undefined) {
+  navigator.mediaDevices = {};
+}
+
+if (navigator.mediaDevices.getUserMedia === undefined) {
+  navigator.mediaDevices.getUserMedia = function(constraints) {
+    // First get ahold of the legacy getUserMedia, if present
+    var getUserMedia = navigator.webkitGetUserMedia || navigator.mozGetUserMedia;
+    // Some browsers just don't implement it - return a rejected promise with an error
+    // to keep a consistent interface
+    if (!getUserMedia) {
+      return Promise.reject(new Error('getUserMedia is not implemented in this browser'));
+    }
+    // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
+    return new Promise(function(resolve, reject) {
+      getUserMedia.call(navigator, constraints, resolve, reject);
+    });
+  }
+}
+
+//console.dir(this.cameras.child(0));
+
+const that = this;
+
+
+//navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: "EFWjQzJg08sJdkgrFGsr1zxWiCyxrTt0PBkmcagnHnQ=" } } })
+navigator.mediaDevices.getUserMedia({ video: true })
+.then(function(stream) {
+  if ("srcObject" in that.getVideoObj()) {
+    that.getVideoObj().srcObject = stream;
+  } else {//old broswers
+    that.source = window.URL.createObjectURL(stream);
+  }
+  that.stream = stream;
+})
+.catch(function(err) {
+  console.log(err.name + ": " + err.message);
+});
+
+
+
     },
     methods: {
+        getVideoObj(){
+            return this.$refs.video;
+        },
         hasMedia() {
             return !!this.getMedia();
         },
         getMedia() {
-            return (navigator.mediaDevices || navigator.webkitGetUserMedia || navigator.oGetUserMedia);
+            return (navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia || navigator.oGetUserMedia);
+        },
+        requestMedia() {
+            navigator.getUserMedia = this.getMedia();
         },
         capture() {
             if (!this.hasMedia()) {
