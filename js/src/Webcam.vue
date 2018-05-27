@@ -84,9 +84,9 @@ this.loadCamera();
             this.selectedCamera +=1;
             if(this.selectedCamera >= this.cameras.length)
                 this.selectedCamera = 0;
-            this.loadCamera();
+            this.loadCamera(this.selectedCamera);
         },
-        loadCamera(cameraCode = null){
+        loadCamera(cameraIndex = null){
             const that = this;
             
             function loadSrcStream(stream){
@@ -97,13 +97,13 @@ this.loadCamera();
                 }
             }
 
-            if(cameraCode === null)
+            if(cameraIndex === null)
                 navigator.mediaDevices.getUserMedia({ video: true }).then(stream =>loadSrcStream(stream))
                 .catch(function(err) {
                 console.log(err.name + ": " + err.message);
                 });
             else
-            navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: this.$cameras[this.selectedCamera].code } } })
+            navigator.mediaDevices.getUserMedia({ video: { deviceId: { exact: this.$cameras[cameraIndex].code } } })
             .then(stream => loadSrcStream(stream))
             .catch(function(err) {
             console.log(err.name + ": " + err.message);
