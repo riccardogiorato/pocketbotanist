@@ -9,24 +9,24 @@
   </div>
 </template>
 <script>
-import Webcam from './Webcam';
-import AnalyzePhoto from './AnalyzePhoto';
+import Webcam from "./Webcam";
+import AnalyzePhoto from "./AnalyzePhoto";
 
 export default {
   data: function() {
     return {
-      windowHeight: window.innerHeight/2,
-      windowWidth:  window.innerWidth
-    }
+      windowHeight: window.innerHeight / 2,
+      windowWidth: window.innerWidth
+    };
   },
   methods: {
     photo() {
-     this.$refs.photoToAnalyze.tookPhoto(this.$refs.webcam.capture());
+      this.$refs.photoToAnalyze.tookPhoto(this.$refs.webcam.capture());
     }
   },
   components: {
     Webcam,
-    AnalyzePhoto,
+    AnalyzePhoto
   }
 };
 </script>
