@@ -7,7 +7,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
-    "start": "parcel src/index.html --no-hmr --https --open",
+    "start": "parcel src/index.html --no-hmr --open --hmr-hostname 192.168.1.66 --https",
     "build": "parcel build src/index.html -d public --public-url ./",
     "clean": "RMDIR  dist /S /Q && RMDIR  public /S /Q && RMDIR  .cache /S /Q"
   },

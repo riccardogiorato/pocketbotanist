@@ -1,8 +1,8 @@
 <template>
     <div id="webcam-view">
-  <button v-on:click="changeCamera">Change camera</button>
-  <p>Chosen camera n. {{selectedCamera+1}} out of {{ cameras.length }}</p>
-        <video ref="video" v-bind:width="width" v-bind:height="height" :src="this.source" autoplay="true"></video>
+      <p>Chosen camera n. {{selectedCamera+1}} out of {{ cameras.length }}</p>
+      <video ref="video" v-bind:width="width" v-bind:height="height" :src="this.source" autoplay="true"></video>
+      <button v-on:click="changeCamera">Change camera</button>
     </div>  
 </template>
 
@@ -93,6 +93,18 @@ export default {
     loadCamera(cameraIndex = null) {
       const that = this;
 
+      function stopStreamedVideo(videoElem) {
+        let stream = videoElem.srcObject;
+        let tracks = stream.getTracks();
+
+        tracks.forEach(function(track) {
+          console.log("stopped?!");
+          track.stop();
+        });
+
+        videoElem.srcObject = null;
+      }
+
       function loadSrcStream(stream) {
         if ("srcObject" in that.getVideoObj()) {
           that.getVideoObj().srcObject = stream;
@@ -109,7 +121,9 @@ export default {
           .catch(function(err) {
             console.log(err.name + ": " + err.message);
           });
-      else
+      else {
+        stopStreamedVideo(this.getVideoObj());
+
         navigator.mediaDevices
           .getUserMedia({
             video: { deviceId: { exact: this.cameras[cameraIndex].code } }
@@ -118,6 +132,7 @@ export default {
           .catch(function(err) {
             console.log(err.name + ": " + err.message);
           });
+      }
     },
     hasMedia() {
       return !!this.getMedia();
@@ -130,9 +145,6 @@ export default {
         navigator.msGetUserMedia ||
         navigator.oGetUserMedia
       );
-    },
-    requestMedia() {
-      navigator.getUserMedia = this.getMedia();
     },
     capture() {
       if (!this.hasMedia()) {

@@ -148,6 +148,8 @@ export class ModelLoader {
     const values = predictions.dataSync();
     predictions.dispose();
 
+    console.dir(Object.keys(IMAGE_CLASSES).length);
+
     let predictionList = [];
     for (let i = 0; i < values.length; i++) {
       predictionList.push({
@@ -155,11 +157,14 @@ export class ModelLoader {
         index: i
       });
     }
+
     predictionList = predictionList
       .sort((a, b) => {
         return b.value - a.value;
       })
       .slice(0, topK);
+
+      console.dir(predictionList);
 
     return predictionList.map(x => {
       return {

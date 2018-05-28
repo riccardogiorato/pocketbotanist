@@ -15,15 +15,15 @@ import * as tfc from "@tensorflow/tfjs-core";
 import { ModelLoader } from "./ModelLoader";
 import { PredictClarifai } from "./PredictClarifai";
 
-const network_width = 227;
-
 export default {
   name: "AnalyzePhoto",
   data() {
     return {
+      network_width: 277,
       loading: false,
       imgSrc: null,
       flowerFoundClarifai: "",
+      flowerFound: false,
       flowerClass: "",
       tensorflowLocal: new ModelLoader()
     };
@@ -33,11 +33,15 @@ export default {
       this.imgSrc = valueImg;
       var img = new Image();
       img.src = this.imgSrc;
-      const ResizedImage = resizeImg(img, network_width);
 
       this.loading = true;
-      this.flowerFoundClarifai = await predictClarifai(ResizedImage);
-      this.flowerClass = await this.predictLocalTensorflow(ResizedImage);
+      if (true || await this.predictClarifai(valueImg)) {
+        const ResizedImage = this.resizeImg(img, this.network_width);
+        const BGRImage = this.tensorflowLocal.RGBtoBGR(img, this.network_width);
+        console.log(BGRImage.toDataURL());
+
+        this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+      }
       this.loading = false;
     },
     /**
@@ -45,51 +49,57 @@ export default {
      * @param {*} img image to predict on
      */
     predictLocalTensorflow: async function(img) {
-      const BGRImage = this.tensorflowLocal.RGBtoBGR(img, network_width);
 
       await this.tensorflowLocal.load();
 
-      const pixels = tfc.fromPixels(BGRImage);
+      const pixels = tfc.fromPixels(img);
 
       let result = await this.tensorflowLocal.predict(pixels);
       await tfc.nextFrame();
       const topK = this.tensorflowLocal.getFoundClasse(result);
 
       this.tensorflowLocal.dispose();
+      console.dir(topK);
       return "<h2>It's a " + topK[0].label + "</h2><br>";
+    },
+    /**
+     * predict the class with remote clarifia model
+     * @param {*} img image to predict on
+     */
+    predictClarifai: async function(img) {
+      // call clarifai general model
+      const clarifai = new PredictClarifai();
+      // get only base64 without prefix
+      const base64img = img.substring(23);
+      // predict with clarifai API
+      const found = await clarifai.isThereAFlower(base64img);
+      if (found) this.flowerFoundClarifai = "There's a flower here 🌺";
+      else
+        this.flowerFoundClarifai =
+          "<h3>There isn't a flower in the photo sorry...😢 </h3>";
+
+      console.log(found, this.flowerFoundClarifai);
+
+      this.flowerFound = found;
+
+      return found;
+    },
+    /**
+     * transform the image from current dimension to dimension
+     * @param {*} img image to transform
+     * @param {*} dimension max dimension of the image === cnn size
+     */
+    resizeImg: function(img, dimension) {
+      let c = document.createElement("canvas");
+      let ctx = c.getContext("2d");
+      let iw = img.width;
+      let ih = img.height;
+      c.width = dimension;
+      c.height = dimension;
+      let scaleFactor = dimension / iw;
+      ctx.drawImage(img, 0, 0, iw * scaleFactor, ih * scaleFactor);
+      return c;
     }
   }
 };
-
-/**
- * transform the image from current dimension to dimension
- * @param {*} img image to transform
- * @param {*} dimension max dimension of the image === cnn size
- */
-function resizeImg(img, dimension) {
-  let c = document.createElement("canvas");
-  let ctx = c.getContext("2d");
-  let iw = img.width;
-  let ih = img.height;
-  c.width = dimension;
-  c.height = dimension;
-  let scaleFactor = dimension / iw;
-  ctx.drawImage(img, 0, 0, iw * scaleFactor, ih * scaleFactor);
-  return c;
-}
-
-/**
- * predict the class with remote clarifia model
- * @param {*} img image to predict on
- */
-async function predictClarifai(img) {
-  // call clarifai general model
-  const clarifai = new PredictClarifai();
-  // get only base64 without prefix
-  const base64img = img.toDataURL().substring(22);
-  // predict with clarifai API
-  const found = await clarifai.isThereAFlower(base64img);
-  if (found) return "There's a flower here 🌺";
-  else return "<h3>There isn't a flower in the photo sorry...😢 </h3>";
-}
 </script>
