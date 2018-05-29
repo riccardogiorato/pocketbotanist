@@ -29,8 +29,6 @@ export class PredictClarifai {
     if (response) {
       const arrConcepts = response["outputs"][0]["data"]["concepts"];
 
-      console.dir(arrConcepts);
-
       const flowers = arrConcepts.filter(obj => obj["name"] === "flower");
 
       if (flowers.length !== 0 && flowers[0]["value"] >= 0.51) {

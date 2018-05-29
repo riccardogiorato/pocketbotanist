@@ -30,17 +30,23 @@ export default {
   },
   methods: {
     tookPhoto: async function(valueImg) {
-      this.imgSrc = valueImg;
-      var img = new Image();
-      img.src = this.imgSrc;
+      //this.imgSrc = valueImg;
 
       this.loading = true;
-      if (true || await this.predictClarifai(valueImg)) {
-        const ResizedImage = this.resizeImg(img, this.network_width);
-        const BGRImage = this.tensorflowLocal.RGBtoBGR(img, this.network_width);
-        console.log(BGRImage.toDataURL());
+      if (await this.predictClarifai(valueImg)) {
+        console.log("found fiore!")
 
-        this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+        //create temp image
+        var img = new Image();
+        img.src = valueImg;
+
+        img.onload = async() => {
+          console.log("onload fiore")
+          const ResizedImage = this.resizeImg(img, this.network_width);
+          const BGRImage = this.tensorflowLocal.RGBtoBGR(ResizedImage, this.network_width);
+          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+        }
+        await img
       }
       this.loading = false;
     },
@@ -48,18 +54,13 @@ export default {
      * predict the class with local tensorflow
      * @param {*} img image to predict on
      */
-    predictLocalTensorflow: async function(img) {
-
+    predictLocalTensorflow: async function(img) {   
       await this.tensorflowLocal.load();
-
       const pixels = tfc.fromPixels(img);
 
-      let result = await this.tensorflowLocal.predict(pixels);
-      await tfc.nextFrame();
+      let result = this.tensorflowLocal.predict(pixels);
       const topK = this.tensorflowLocal.getFoundClasse(result);
-
       this.tensorflowLocal.dispose();
-      console.dir(topK);
       return "<h2>It's a " + topK[0].label + "</h2><br>";
     },
     /**
@@ -90,14 +91,14 @@ export default {
      * @param {*} dimension max dimension of the image === cnn size
      */
     resizeImg: function(img, dimension) {
-      let c = document.createElement("canvas");
+      let c = document.createElement('canvas');
       let ctx = c.getContext("2d");
       let iw = img.width;
       let ih = img.height;
       c.width = dimension;
       c.height = dimension;
       let scaleFactor = dimension / iw;
-      ctx.drawImage(img, 0, 0, iw * scaleFactor, ih * scaleFactor);
+      ctx.drawImage(img, 0, 0, dimension,dimension);
       return c;
     }
   }

@@ -72,7 +72,7 @@ export class ModelLoader {
       imgBGR.data[i + 3] = 255;
     }
     ctx2.putImageData(imgBGR, 0, 0);
-    this.blurCanvas(canv2, ctx2);
+    //this.blurCanvas(canv2, ctx2);
 
     return canv2;
   }
@@ -148,8 +148,6 @@ export class ModelLoader {
     const values = predictions.dataSync();
     predictions.dispose();
 
-    console.dir(Object.keys(IMAGE_CLASSES).length);
-
     let predictionList = [];
     for (let i = 0; i < values.length; i++) {
       predictionList.push({
@@ -163,8 +161,6 @@ export class ModelLoader {
         return b.value - a.value;
       })
       .slice(0, topK);
-
-      console.dir(predictionList);
 
     return predictionList.map(x => {
       return {
