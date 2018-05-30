@@ -7,6 +7,7 @@
         <div v-else >
           <p v-html="flowerClass"></p>
           <p v-html="flowerFoundClarifai"></p>
+          <p v-html="flowerFoundAlgo"></p>
         </div>
     </div>
 </template>
@@ -14,17 +15,20 @@
 import * as tfc from "@tensorflow/tfjs-core";
 import { ModelLoader } from "./ModelLoader";
 import { PredictClarifai } from "./PredictClarifai";
+import { PredictAlgorithmia } from "./PredictAlgorithmia";
+
 
 export default {
   name: "AnalyzePhoto",
   data() {
     return {
-      network_width: 277,
+      network_width: 227,
       loading: false,
       imgSrc: null,
       flowerFoundClarifai: "",
       flowerFound: false,
       flowerClass: "",
+      flowerFoundAlgo: "",
       tensorflowLocal: new ModelLoader()
     };
   },
@@ -34,8 +38,6 @@ export default {
 
       this.loading = true;
       if (await this.predictClarifai(valueImg)) {
-        console.log("found fiore!")
-
         //create temp image
         var img = new Image();
         img.src = valueImg;
@@ -44,6 +46,7 @@ export default {
           console.log("onload fiore")
           const ResizedImage = this.resizeImg(img, this.network_width);
           const BGRImage = this.tensorflowLocal.RGBtoBGR(ResizedImage, this.network_width);
+          this.flowerFoundAlgo = await this.predictAlgorithmiaTensorflow(BGRImage.toDataURL());
           this.flowerClass = await this.predictLocalTensorflow(BGRImage);
         }
         await img
@@ -63,6 +66,15 @@ export default {
       this.tensorflowLocal.dispose();
       return "<h2>It's a " + topK[0].label + "</h2><br>";
     },
+    /**
+     * predict the class with remote tensorflow on Algorithmia
+     * @param {*} img image to predict on
+     */
+    predictAlgorithmiaTensorflow: async function(img) {   
+      const algorithmia = new PredictAlgorithmia();
+      return algorithmia.predict(img);
+    },
+
     /**
      * predict the class with remote clarifia model
      * @param {*} img image to predict on
