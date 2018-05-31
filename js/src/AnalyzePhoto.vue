@@ -5,9 +5,11 @@
         </div>
         <div v-if="loading" id="resultsSpinn" class="loader"></div>
         <div v-else >
-          <p v-html="flowerClass"></p>
           <p v-html="flowerFoundClarifai"></p>
+          Remote Tensorflow
           <p v-html="flowerFoundAlgo"></p>
+          And finally Local Tensorflow
+          <p v-html="flowerClass"></p>
         </div>
     </div>
 </template>
@@ -33,6 +35,11 @@ export default {
   },
   methods: {
     tookPhoto: async function(valueImg) {
+      this.flowerFoundClarifai= "";
+      this.flowerFound = false;
+      this.flowerClass = "";
+      this.flowerFoundAlgo = "";
+
       this.loading = true;
       if (await this.predictClarifai(valueImg)) {
         //create temp image
@@ -48,10 +55,9 @@ export default {
             this.network_width
           );
 
-          this.flowerFoundAlgo = await this.predictAlgorithmiaTensorflow(
-            BGRImage.toDataURL()
-          );
-          //this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+          this.flowerFoundAlgo = "<h2>"+ await this.predictAlgorithmiaTensorflow(BGRImage.toDataURL()) +"</h2>";
+
+          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
         };
         await img;
       }

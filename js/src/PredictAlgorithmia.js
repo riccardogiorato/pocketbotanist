@@ -1,3 +1,5 @@
+//import Algorithmia from "./Algorithmia"
+
 /**
  * This class predict content of an image with the 
  * custom Algorithmia serverless function, telling the class of a flower
@@ -19,9 +21,18 @@ export class PredictAlgorithmia {
    */
   async predict(image) {
 
-    return await new Promise(resolve => {
+    return await new Promise(resolve => { Algorithmia.client("sim+lHZ2+0fW+jdBFWnX6U2EaMA1")
+    .algo("riccardogiorato/yourPocketbotanist/0.1.1")
+    .pipe(image)
+    .then(function(output) {
+        resolve(output.result);
+    });
+  });
+
+
+    /*return await new Promise(resolve => {
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://api.algorithmia.com/v1/algo/riccardogiorato/yourPocketbotanist/0.1.1/", true);
+      xhr.open("POST", "https://api.algorithmia.com/v1/web/algo/riccardogiorato/yourPocketbotanist/0.1.1/", true);
       xhr.setRequestHeader("Authorization", "Simple" +  this.apiKey);
       xhr.setRequestHeader("Content-type", "text/plain");
       xhr.setRequestHeader("user", "riccardogiorato");
@@ -35,6 +46,7 @@ export class PredictAlgorithmia {
       };
 
       xhr.send(image);
-   }) 
+    }) */
+
   } // predict
 }

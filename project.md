@@ -72,3 +72,13 @@ fine grained datasets -> 17 types of flowers
 fine tuning
 
 cutting the FC makes the CNN act as a feature extractor and by using really complex ones who has been trained for ages you get good results with short training time
+
+
+
+fine di giugno - 16 june
+fine di luglio - 25 july
+
+20 june the repository and documentation and docs
+27 june presentation
+report of what I've done
+presentation power point - 15 minutes - 10 slides

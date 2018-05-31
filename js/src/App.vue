@@ -8,9 +8,9 @@
     <div>
       <p>Or if you want upload an image</p>
       <vue-base64-file-upload 
-        class="v1"
+        class="takenimage"
         accept="image/png,image/jpeg"
-        image-class="v1-image"
+        image-class="takenImage"
         input-class="v1-image"
         :max-size="customImageMaxSize"
         @load="onFileUploaded"
