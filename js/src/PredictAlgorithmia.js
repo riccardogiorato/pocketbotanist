@@ -21,7 +21,7 @@ export class PredictAlgorithmia {
 
     return await new Promise(resolve => {
       var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://api.algorithmia.com/v1/algo/riccardogiorato/yourPocketbotanist/", true);
+      xhr.open("POST", "https://api.algorithmia.com/v1/algo/riccardogiorato/yourPocketbotanist/0.1.1/", true);
       xhr.setRequestHeader("Authorization", "Simple" +  this.apiKey);
       xhr.setRequestHeader("Content-type", "text/plain");
       xhr.setRequestHeader("user", "riccardogiorato");

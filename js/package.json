@@ -19,6 +19,7 @@
     "clarifai": "^2.7.1",
     "parcel-bundler": "~1.7.0",
     "vue": "^2.5.16",
+    "vue-base64-file-upload": "^1.0.4",
     "vue-hot-reload-api": "^2.3.0",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.16",

@@ -17,7 +17,6 @@ import { ModelLoader } from "./ModelLoader";
 import { PredictClarifai } from "./PredictClarifai";
 import { PredictAlgorithmia } from "./PredictAlgorithmia";
 
-
 export default {
   name: "AnalyzePhoto",
   data() {
@@ -34,22 +33,27 @@ export default {
   },
   methods: {
     tookPhoto: async function(valueImg) {
-      //this.imgSrc = valueImg;
-
       this.loading = true;
       if (await this.predictClarifai(valueImg)) {
         //create temp image
         var img = new Image();
         img.src = valueImg;
 
-        img.onload = async() => {
-          console.log("onload fiore")
-          const ResizedImage = this.resizeImg(img, this.network_width);
-          const BGRImage = this.tensorflowLocal.RGBtoBGR(ResizedImage, this.network_width);
-          this.flowerFoundAlgo = await this.predictAlgorithmiaTensorflow(BGRImage.toDataURL());
-          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
-        }
-        await img
+        img.onload = async () => {
+          let ResizedImage = this.resizeImg256(img);
+          ResizedImage = this.cropcenter(ResizedImage, this.network_width);
+
+          const BGRImage = this.tensorflowLocal.RGBtoBGR(
+            ResizedImage,
+            this.network_width
+          );
+
+          this.flowerFoundAlgo = await this.predictAlgorithmiaTensorflow(
+            BGRImage.toDataURL()
+          );
+          //this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+        };
+        await img;
       }
       this.loading = false;
     },
@@ -57,7 +61,7 @@ export default {
      * predict the class with local tensorflow
      * @param {*} img image to predict on
      */
-    predictLocalTensorflow: async function(img) {   
+    predictLocalTensorflow: async function(img) {
       await this.tensorflowLocal.load();
       const pixels = tfc.fromPixels(img);
 
@@ -70,7 +74,7 @@ export default {
      * predict the class with remote tensorflow on Algorithmia
      * @param {*} img image to predict on
      */
-    predictAlgorithmiaTensorflow: async function(img) {   
+    predictAlgorithmiaTensorflow: async function(img) {
       const algorithmia = new PredictAlgorithmia();
       return algorithmia.predict(img);
     },
@@ -98,20 +102,38 @@ export default {
       return found;
     },
     /**
-     * transform the image from current dimension to dimension
+     * transform the image from current dimension to 256
+     * @param {*} img image to transform
+     */
+    resizeImg256: function(img) {
+      let c = document.createElement("canvas");
+      let ctx = c.getContext("2d");
+      c.width = 256;
+      c.height = 256;
+      this.disableSmoothCanvas(ctx);
+      ctx.drawImage(img, 0, 0, 256, 256);
+      return c;
+    },
+    /**
+     * transform the image from current dimension to dimension cropping to center
      * @param {*} img image to transform
      * @param {*} dimension max dimension of the image === cnn size
      */
-    resizeImg: function(img, dimension) {
-      let c = document.createElement('canvas');
+    cropcenter: function(img, dimension) {
+      let c = document.createElement("canvas");
       let ctx = c.getContext("2d");
-      let iw = img.width;
-      let ih = img.height;
       c.width = dimension;
       c.height = dimension;
-      let scaleFactor = dimension / iw;
-      ctx.drawImage(img, 0, 0, dimension,dimension);
+      this.disableSmoothCanvas(ctx);
+      ctx.drawImage(img, 14.5, 14.5, 227, 227, 0, 0, 227, 227);
       return c;
+    },
+    disableSmoothCanvas: function(ctx) {
+      ctx.imageSmoothingEnabled = false;
+      ctx.webkitImageSmoothingEnabled = false;
+      ctx.mozImageSmoothingEnabled = false;
+      ctx.msImageSmoothingEnabled = false;
+      ctx.oImageSmoothingEnabled = false;
     }
   }
 };

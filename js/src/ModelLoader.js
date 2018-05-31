@@ -54,6 +54,9 @@ export class ModelLoader {
     c.width = dimension;
     c.height = dimension;
     let ctx = c.getContext("2d");
+    ctx.webkitImageSmoothingEnabled = false;
+    ctx.mozImageSmoothingEnabled = false;
+    ctx.imageSmoothingEnabled = false; 
 
     ctx.drawImage(img, 0, 0);
     const imgData = ctx.getImageData(0, 0, c.width, c.height);
@@ -62,6 +65,9 @@ export class ModelLoader {
     canv2.width = dimension;
     canv2.height = dimension;
     let ctx2 = canv2.getContext("2d");
+    ctx2.webkitImageSmoothingEnabled = false;
+    ctx2.mozImageSmoothingEnabled = false;
+    ctx2.imageSmoothingEnabled = false; 
     let imgBGR = ctx2.createImageData(dimension, dimension);
 
     // convert RGB to BGR colors
@@ -136,7 +142,9 @@ export class ModelLoader {
    * @param {*} predictions the return from predict function
    */
   getFoundClasse(predictions) {
-    return this.getTopKClasses(predictions, 1);
+    const preds = this.getTopKClasses(predictions, 5);
+    console.dir(preds);
+    return preds;
   }
 
   /**
