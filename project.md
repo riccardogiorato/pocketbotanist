@@ -58,11 +58,8 @@
 * understand which kind of model the microsoft team is using to build models fast in customvision
 * look at Modeldepot
 * classify with Tensorflow model built with Lobe
+* https://greenkeeper.io/
 
-**Possible datasets:**
-
-* 5 types of flowers
-* 4 types of blood cells
 
 **API call:**
 https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Training/projects/bd1adee5-8e9e-4fe2-a0d8-ea275b91e2be/iterations/e39b2666-938d-4b45-8045-2c548ba2b1ad/export
