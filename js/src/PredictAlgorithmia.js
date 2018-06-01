@@ -12,7 +12,8 @@ export class PredictAlgorithmia {
    * construct a clarifai app
    */
   constructor() {
-      this.apiKey = "simj8qWc7hacc8hWeSw6e+oJe/d1"
+    this.apiKey = "simj8qWc7hacc8hWeSw6e+oJe/d1";
+    this.projectName = "riccardogiorato/yourPocketbotanist/0.1.1";
   } // constructor
 
   /**
@@ -21,13 +22,14 @@ export class PredictAlgorithmia {
    */
   async predict(image) {
 
-    return await new Promise(resolve => { Algorithmia.client("sim+lHZ2+0fW+jdBFWnX6U2EaMA1")
-    .algo("riccardogiorato/yourPocketbotanist/0.1.1")
-    .pipe(image)
-    .then(function(output) {
-        resolve(output.result);
+    return await new Promise(resolve => {
+      Algorithmia.client(this.apiKey)
+        .algo(this.projectName)
+        .pipe(image)
+        .then(function (output) {
+          resolve(output.result);
+        });
     });
-  });
 
 
     /*return await new Promise(resolve => {

@@ -9,7 +9,7 @@
       <p>Or if you want upload an image</p>
       <vue-base64-file-upload 
         class="takenimage"
-        accept="image/png,image/jpeg"
+        accept="image/jpg,image/png,image/jpeg"
         image-class="takenImage"
         input-class="v1-image"
         :max-size="customImageMaxSize"
