@@ -1,0 +1,23 @@
+@startuml
+
+title "your Pocket botanist - Testing"
+
+(*) --> "Downloaded Instagram photos with flower class in the hashtags"
+
+ --> "Remove wrong labeled images"
+
+--> ===B1===
+--> "Tested Clarifai general model" 
+--> ===B2===
+
+===B1=== --> "Tested Tensorflow Algorithmia"
+--> ===B2===
+
+===B1=== --> "Tested Tensorflow Javascript model"
+--> ===B2===
+
+--> "Created report with results"
+
+--> (*)
+
+@enduml

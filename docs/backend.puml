@@ -1,0 +1,29 @@
+@startuml
+
+title "your Pocket botanist - Backend"
+
+(*) --> "User take or upload an Image"
+
+ --> "Clarifiai general vision model check if flower present"
+
+ --> "Image resolution is reduced"
+
+ --> "Image is turned from rgb to gbr"
+
+--> ===B1===
+--> "Local Tensorflow TFJS" 
+--> ===B2===
+
+===B1=== --> "Remote Tensorflow Algorithmia"
+--> ===B2===
+
+--> "display result to the frontend/user"
+
+-->  if "is enabled help report" then
+	-->[true] "upload image and results to datadog API"
+	-->(*)
+  else
+  -->[false](*)
+  endif
+
+@enduml

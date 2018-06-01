@@ -1,0 +1,28 @@
+@startuml
+
+title "your Pocket botanist - Training"
+
+(*) --> "Downloaded a flower dataset from kaggle"
+
+ --> "Remove unwanted images, cartoons, people faces"
+
+--> ===B1===
+--> "Tested Clarifai general model to find flowers" 
+--> ===B2===
+
+===B1=== --> "Trained Customvision.ai model"
+--> ===B2===
+
+--> "exported Customvision.ai model"
+
+--> ===C1===
+--> "Uploaded the model to Algorithmia data storage" 
+--> ===C2===
+
+===C1=== --> "converted the frozen model to TFJS Format"
+--> "uploaded the TFJS converted model to web data server"
+--> ===C2===
+
+--> (*)
+
+@enduml
