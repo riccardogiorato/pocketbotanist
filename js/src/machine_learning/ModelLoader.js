@@ -4,7 +4,7 @@ import {
 } from "@tensorflow/tfjs-converter/dist/executor/frozen_model";
 import {
   IMAGE_CLASSES
-} from "./classes";
+} from "../classes";
 
 const CURRENT_ASSETS_DIR = "https://models.pocketbotanist.ml/";
 
@@ -91,12 +91,14 @@ export class ModelLoader {
       });
     }
 
+    // reorder the predictions from the biggest to the smallest one
     predictionList = predictionList
       .sort((a, b) => {
         return b.value - a.value;
       })
       .slice(0, topK);
 
+    // map the prediction to the right label
     return predictionList.map(x => {
       return {
         label: IMAGE_CLASSES[x.index],

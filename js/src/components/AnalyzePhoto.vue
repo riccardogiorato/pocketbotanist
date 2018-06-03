@@ -14,35 +14,35 @@
     </div>
 </template>
 <script>
-import * as tfc from "@tensorflow/tfjs-core";
-import { ModelLoader } from "./ModelLoader";
-import { PredictClarifai } from "./PredictClarifai";
-import { PredictAlgorithmia } from "./PredictAlgorithmia";
+import * as tfc from '@tensorflow/tfjs-core';
+import { ModelLoader } from '../machine_learning/ModelLoader';
+import { PredictClarifai } from '../machine_learning/PredictClarifai';
+import { PredictAlgorithmia } from '../machine_learning/PredictAlgorithmia';
 
 export default {
-  name: "AnalyzePhoto",
+  name: 'AnalyzePhoto',
   data() {
     return {
       network_width: 227,
       loading: false,
       imgSrc: null,
-      flowerFoundClarifai: "",
+      flowerFoundClarifai: '',
       flowerFound: false,
-      flowerClass: "",
-      flowerFoundAlgo: "",
+      flowerClass: '',
+      flowerFoundAlgo: '',
       tensorflowLocal: new ModelLoader()
     };
   },
   methods: {
-    /** analyse and image base64 with Clarifai API and 
+    /** analyse and image base64 with Clarifai API and
      *  Tensorflow remote or local execution
      * @param {*} valueImg nase64 image to check if present flowers
      */
     tookPhoto: async function(valueImg) {
-      this.flowerFoundClarifai = "";
+      this.flowerFoundClarifai = '';
       this.flowerFound = false;
-      this.flowerClass = "";
-      this.flowerFoundAlgo = "";
+      this.flowerClass = '';
+      this.flowerFoundAlgo = '';
 
       this.loading = true;
       if (await this.predictClarifai(valueImg)) {
@@ -54,15 +54,12 @@ export default {
           let ResizedImage = this.resizeImg256(img);
           ResizedImage = this.cropcenter(ResizedImage, this.network_width);
 
-          const BGRImage = this.RGBtoBGR(
-            ResizedImage,
-            this.network_width
-          );
+          const BGRImage = this.RGBtoBGR(ResizedImage, this.network_width);
 
           this.flowerFoundAlgo =
-            "<h2>" +
+            '<h2>' +
             (await this.predictAlgorithmiaTensorflow(BGRImage.toDataURL())) +
-            "</h2>";
+            '</h2>';
 
           this.flowerClass = await this.predictLocalTensorflow(BGRImage);
         };
@@ -82,7 +79,7 @@ export default {
       let result = this.tensorflowLocal.predict(pixels);
       const topK = this.tensorflowLocal.getFoundClasse(result);
       this.tensorflowLocal.dispose();
-      return "<h2>It's a " + topK[0].label + "</h2><br>";
+      return "<h2>It's a " + topK[0].label + '</h2><br>';
     },
 
     /**
@@ -121,8 +118,8 @@ export default {
      * @param {*} img image to transform
      */
     resizeImg256: function(img) {
-      let c = document.createElement("canvas");
-      let ctx = c.getContext("2d");
+      let c = document.createElement('canvas');
+      let ctx = c.getContext('2d');
       c.width = 256;
       c.height = 256;
       this.disableSmoothCanvas(ctx);
@@ -135,15 +132,15 @@ export default {
      * @param {*} dimension max dimension of the image === cnn size
      */
     cropcenter: function(img, dimension) {
-      let c = document.createElement("canvas");
-      let ctx = c.getContext("2d");
+      let c = document.createElement('canvas');
+      let ctx = c.getContext('2d');
       c.width = dimension;
       c.height = dimension;
       this.disableSmoothCanvas(ctx);
       ctx.drawImage(img, 14.5, 14.5, 227, 227, 0, 0, 227, 227);
       return c;
     },
-    /** 
+    /**
      * disable smoothing from canvas to prevent blurred downsampling
      * @param {*} ctx which needs image smoothing disabled
      */
@@ -160,19 +157,19 @@ export default {
      * @param {*} dimension max dimension of the image === cnn size
      */
     RGBtoBGR: function(img, dimension) {
-      let c = document.createElement("canvas");
+      let c = document.createElement('canvas');
       c.width = dimension;
       c.height = dimension;
-      let ctx = c.getContext("2d");
+      let ctx = c.getContext('2d');
       this.disableSmoothCanvas(ctx);
 
       ctx.drawImage(img, 0, 0);
       const imgData = ctx.getImageData(0, 0, c.width, c.height);
 
-      let canv2 = document.createElement("canvas");
+      let canv2 = document.createElement('canvas');
       canv2.width = dimension;
       canv2.height = dimension;
-      let ctx2 = canv2.getContext("2d");
+      let ctx2 = canv2.getContext('2d');
       this.disableSmoothCanvas(ctx2);
       let imgBGR = ctx2.createImageData(dimension, dimension);
 

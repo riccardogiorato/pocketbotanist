@@ -21,8 +21,12 @@
     "vue": "^2.5.16",
     "vue-base64-file-upload": "^1.0.4",
     "vue-hot-reload-api": "^2.3.0",
+    "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.16",
     "vue-web-cam": "1.0.2"
+  },
+  "devDependencies": {
+    "node-sass": "^4.9.0"
   }
 }

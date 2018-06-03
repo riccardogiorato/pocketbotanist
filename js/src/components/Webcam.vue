@@ -1,8 +1,6 @@
 <template>
     <div id="webcam-view">
-      <p>Chosen camera n. {{selectedCamera+1}} out of {{ cameras.length }}</p>
       <video ref="video" v-bind:width="width" v-bind:height="height" :src="this.source" autoplay="true"></video>
-      <button v-on:click="changeCamera">Change camera</button>
     </div>  
 </template>
 
@@ -11,8 +9,8 @@ export default {
   data() {
     return {
       selectedCamera: 0,
-      stream: "",
-      source: "",
+      stream: '',
+      source: '',
       canvas: null,
       cameras: []
     };
@@ -32,12 +30,12 @@ export default {
     },
     screenshotFormat: {
       type: String,
-      default: "image/jpeg"
+      default: 'image/jpeg'
     }
   },
   mounted() {
     if (!this.hasMedia()) {
-      this.$emit("notsupported");
+      this.$emit('notsupported');
       return;
     }
 
@@ -45,9 +43,9 @@ export default {
       deviceInfos => {
         for (var i = 0; i !== deviceInfos.length; ++i) {
           var deviceInfo = deviceInfos[i];
-          if (deviceInfo.kind === "videoinput") {
+          if (deviceInfo.kind === 'videoinput') {
             this.cameras.push({
-              name: deviceInfo.label || "camera " + (this.cameras.length + 1),
+              name: deviceInfo.label || 'camera ' + (this.cameras.length + 1),
               code: deviceInfo.deviceId
             });
           } //videoinput
@@ -69,7 +67,7 @@ export default {
         // to keep a consistent interface
         if (!getUserMedia) {
           return Promise.reject(
-            new Error("getUserMedia is not implemented in this browser")
+            new Error('getUserMedia is not implemented in this browser')
           );
         }
         // Otherwise, wrap the call to the old navigator.getUserMedia with a Promise
@@ -98,7 +96,7 @@ export default {
         let tracks = stream.getTracks();
 
         tracks.forEach(function(track) {
-          console.log("stopped?!");
+          console.log('stopped?!');
           track.stop();
         });
 
@@ -106,7 +104,7 @@ export default {
       }
 
       function loadSrcStream(stream) {
-        if ("srcObject" in that.getVideoObj()) {
+        if ('srcObject' in that.getVideoObj()) {
           that.getVideoObj().srcObject = stream;
         } else {
           //old broswers
@@ -119,7 +117,7 @@ export default {
           .getUserMedia({ video: true })
           .then(stream => loadSrcStream(stream))
           .catch(function(err) {
-            console.log(err.name + ": " + err.message);
+            console.log(err.name + ': ' + err.message);
           });
       else {
         stopStreamedVideo(this.getVideoObj());
@@ -130,7 +128,7 @@ export default {
           })
           .then(stream => loadSrcStream(stream))
           .catch(function(err) {
-            console.log(err.name + ": " + err.message);
+            console.log(err.name + ': ' + err.message);
           });
       }
     },
@@ -148,7 +146,7 @@ export default {
     },
     capture() {
       if (!this.hasMedia()) {
-        this.$emit("notsupported");
+        this.$emit('notsupported');
         return null;
       }
       return this.getCanvas().toDataURL(this.screenshotFormat);
@@ -156,12 +154,12 @@ export default {
     getCanvas() {
       let video = this.$refs.video;
       if (!this.ctx) {
-        let canvas = document.createElement("canvas");
+        let canvas = document.createElement('canvas');
         canvas.height = video.clientHeight;
         canvas.width = video.clientWidth;
         this.canvas = canvas;
 
-        this.ctx = canvas.getContext("2d");
+        this.ctx = canvas.getContext('2d');
       }
 
       const { ctx, canvas } = this;

@@ -1,12 +1,31 @@
 <template>
   <div id="app">
     <h1>Your Pocket Botanist</h1>
-    <div id="webcam">
-      <webcam ref="webcam" v-bind:height="windowHeight" v-bind:width="windowWidth"></webcam>
-      <button type="button" @click="photo">Capture Photo</button>
-    </div>
-    <div>
-      <p>Or if you want upload an image</p>
+
+    <md-card>
+      <md-card-media>
+        <webcam ref="webcam" v-bind:height="windowHeight" v-bind:width="windowWidth"></webcam>
+      </md-card-media>
+
+      <md-card-header>
+        <div class="md-title">Your camera feed</div>
+      </md-card-header>
+
+      <md-card-expand>
+        <md-card-actions md-alignment="space-between">
+          <div>
+            <md-button class="md-raised md-primary" @click="photo()">What flower is it?</md-button>
+          </div>
+
+          <div>
+            <md-button @click="changeCamera()">Change camera</md-button>
+          </div>
+        </md-card-actions>
+      </md-card-expand>
+
+    </md-card>
+
+          <p>Or if you want upload an image</p>
       <vue-base64-file-upload 
         class="takenimage"
         accept="image/jpg,image/png,image/jpeg"
@@ -15,15 +34,14 @@
         :max-size="customImageMaxSize"
         @load="onFileUploaded"
         />
-    </div>
 
     <analyze-photo ref="photoToAnalyze"></analyze-photo>
   </div>
 </template>
 <script>
 import VueBase64FileUpload from 'vue-base64-file-upload';
-import Webcam from "./Webcam";
-import AnalyzePhoto from "./AnalyzePhoto";
+import Webcam from './components/Webcam';
+import AnalyzePhoto from './components/AnalyzePhoto';
 
 export default {
   data: function() {
@@ -37,14 +55,17 @@ export default {
     photo() {
       this.$refs.photoToAnalyze.tookPhoto(this.$refs.webcam.capture());
     },
+    changeCamera() {
+      this.$refs.webcam.changeCamera();
+    },
     onFileUploaded(file) {
       this.$refs.photoToAnalyze.tookPhoto(file);
-    },
+    }
   },
   components: {
     Webcam,
     AnalyzePhoto,
-    VueBase64FileUpload,
+    VueBase64FileUpload
   }
 };
 </script>
