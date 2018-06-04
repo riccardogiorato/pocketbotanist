@@ -27,6 +27,7 @@
     "vue-web-cam": "1.0.2"
   },
   "devDependencies": {
-    "node-sass": "^4.9.0"
+    "node-sass": "^4.9.0",
+    "parcel-plugin-bundle-visualiser": "^1.1.2"
   }
 }

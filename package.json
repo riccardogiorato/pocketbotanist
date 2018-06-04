@@ -20,8 +20,6 @@
     "python": "cd python && pip install requiriments.txt",
     "docsbuild": "cd website && yarn run build"
   },
-  "dependencies": {
-    "vue-material": "^1.0.0-beta-10.2",
-    "vue-web-cam": "^1.0.4"
-  }
+  "dependencies": {},
+  "devDependencies": {}
 }

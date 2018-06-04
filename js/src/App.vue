@@ -11,8 +11,8 @@
         :max-size="customImageMaxSize"
         @load="onFileUploaded"
         hidden
-        disablePreview
-        />
+        disablePreview>
+        <vue-base64-file-upload/>
 
     <analyze-photo ref="photoToAnalyze"></analyze-photo>
 
