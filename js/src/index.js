@@ -1,5 +1,4 @@
 import Vue from 'vue/dist/vue.js';
-import App from './App.vue';
 import VueRouter from 'vue-router'
 import VueMaterial from 'vue-material'
 import 'vue-material/dist/vue-material.min.css'
@@ -8,7 +7,10 @@ import 'vue-material/dist/theme/default.css'
 // custom pages
 import RouteTransition from './components/RouteTransition';
 import Guide from './pages/Guide';
-import splashscreen from './pages/SplashScreen';
+import Splashscreen from './pages/SplashScreen';
+import App from './pages/App.vue';
+import Loading from './pages/Loading.vue';
+import Settings from './pages/Settings.vue';
 
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
@@ -18,7 +20,7 @@ const routes = [{
   component: RouteTransition,
   children: [{
       path: '',
-      component: splashscreen
+      component: Splashscreen
     },
     {
       path: '/guide',
@@ -27,6 +29,14 @@ const routes = [{
     {
       path: '/app',
       component: App
+    },
+    {
+      path: '/loading',
+      component: Loading
+    },
+    {
+      path: '/settings',
+      component: Settings
     }
   ]
 }]

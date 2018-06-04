@@ -11,6 +11,9 @@
           And finally Local Tensorflow
           <p v-html="flowerClass"></p>
         </div>
+
+<a href="/app"><md-icon class="iconBig">arrow_back</md-icon></a>
+
     </div>
 </template>
 <script>
@@ -62,9 +65,9 @@ export default {
             '</h2>';
 
           this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+          this.loading = false;
         };
         await img;
-        this.loading = false;
       }
     },
 
@@ -222,3 +225,9 @@ export default {
   }
 };
 </script>
+<style>
+.iconBig {
+  font-size: 60px !important;
+  margin: auto 15px;
+}
+</style>

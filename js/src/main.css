@@ -41,6 +41,11 @@ canvas {
 }
 
 .loader {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -75px;
+    margin-left: -75px;
     border: 16px solid #f3f3f3;
     /* Light grey */
     border-top: 16px solid green;

@@ -14,9 +14,7 @@
         disablePreview>
       </vue-base64-file-upload>
 
-    <analyze-photo ref="photoToAnalyze"></analyze-photo>
-
-      <md-bottom-bar md-sync-route md-active-item=cameraApp>
+      <md-bottom-bar md-sync-route md-active-item=cameraApp id="menuMobile">
         <div id="menuItemsMobile" class="centered">
           <md-bottom-bar-item @click="uploadFile()" md-label="Load Image" md-icon="add"></md-bottom-bar-item>
           <md-bottom-bar-item id="cameraApp" @click="photo()" md-label="Take Photo" md-icon="camera"></md-bottom-bar-item>
@@ -27,9 +25,8 @@
   </div>
 </template>
 <script>
-import VueBase64FileUpload from './components/Vue-base64-file-upload';
-import Webcam from './components/Webcam';
-import AnalyzePhoto from './components/AnalyzePhoto';
+import VueBase64FileUpload from '../components/Vue-base64-file-upload';
+import Webcam from '../components/Webcam';
 
 export default {
   data: function() {
@@ -41,7 +38,12 @@ export default {
   },
   methods: {
     photo() {
-      this.$refs.photoToAnalyze.tookPhoto(this.$refs.webcam.capture());
+      //save and redirect
+      localStorage.setItem(
+        'photo',
+        JSON.stringify(this.$refs.webcam.capture())
+      );
+      this.$router.push('/loading');
     },
     uploadFile() {
       this.$refs.uploadFile.inputFile();
@@ -50,12 +52,12 @@ export default {
       this.$refs.webcam.changeCamera();
     },
     onFileUploaded(file) {
-      this.$refs.photoToAnalyze.tookPhoto(file);
+      localStorage.setItem('photo', JSON.stringify(file));
+      this.$router.push('/loading');
     }
   },
   components: {
     Webcam,
-    AnalyzePhoto,
     VueBase64FileUpload
   }
 };
