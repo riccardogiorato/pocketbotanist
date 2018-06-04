@@ -40,8 +40,6 @@ new Vue({
   router,
   template: `
     <div id="app">
-        <router-link to="/">/</router-link>
-        <router-link to="/app">/parent</router-link>
       <transition name="fade" mode="out-in">
         <router-view class="view"></router-view>
       </transition>

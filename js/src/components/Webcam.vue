@@ -1,6 +1,7 @@
 <template>
-    <div id="webcam-view">
-      <video ref="video" v-bind:width="width" v-bind:height="height" :src="this.source" autoplay="true"></video>
+    <div id="webcam-view"> <!-- v-bind:width="width" v-bind:height="height"  -->
+      <video id="webcamFeed" ref="video" :src="this.source" autoplay="true"></video>
+      <md-button id="changeCamera" @click="changeCamera()">Change camera</md-button>
     </div>  
 </template>
 
@@ -170,3 +171,26 @@ export default {
   }
 };
 </script>
+<style>
+#webcam-view {
+  width: 100%;
+  height: 80vh;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#webcamFeed {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+#changeCamera {
+  top: -50px;
+  background: white;
+  margin: 0 auto;
+  display: block;
+}
+</style>

@@ -1,45 +1,31 @@
 <template>
   <div id="app">
-    <h1>Your Pocket Botanist</h1>
 
-    <md-card>
-      <md-card-media>
-        <webcam ref="webcam" v-bind:height="windowHeight" v-bind:width="windowWidth"></webcam>
-      </md-card-media>
+      <webcam ref="webcam" v-bind:height="windowHeight" v-bind:width="windowWidth"></webcam>
 
-      <md-card-header>
-        <div class="md-title">Your camera feed</div>
-      </md-card-header>
-
-      <md-card-expand>
-        <md-card-actions md-alignment="space-between">
-          <div>
-            <md-button class="md-raised md-primary" @click="photo()">What flower is it?</md-button>
-          </div>
-
-          <div>
-            <md-button @click="changeCamera()">Change camera</md-button>
-          </div>
-        </md-card-actions>
-      </md-card-expand>
-
-    </md-card>
-
-          <p>Or if you want upload an image</p>
-      <vue-base64-file-upload 
+      <vue-base64-file-upload ref="uploadFile"
         class="takenimage"
         accept="image/jpg,image/png,image/jpeg"
         image-class="takenImage"
         input-class="v1-image"
         :max-size="customImageMaxSize"
         @load="onFileUploaded"
+        hidden
+        disablePreview
         />
 
     <analyze-photo ref="photoToAnalyze"></analyze-photo>
+
+      <md-bottom-bar class="menuMobile" md-sync-route md-active-item=cameraApp>
+        <md-bottom-bar-item @click="uploadFile()" md-label="Load Image" md-icon="add"></md-bottom-bar-item>
+        <md-bottom-bar-item id="cameraApp" @click="photo()" md-label="Take Photo" md-icon="camera"></md-bottom-bar-item>
+        <md-bottom-bar-item to="/settings" md-label="Settings" md-icon="settings"></md-bottom-bar-item>
+      </md-bottom-bar>
+
   </div>
 </template>
 <script>
-import VueBase64FileUpload from 'vue-base64-file-upload';
+import VueBase64FileUpload from './components/Vue-base64-file-upload';
 import Webcam from './components/Webcam';
 import AnalyzePhoto from './components/AnalyzePhoto';
 
@@ -55,6 +41,9 @@ export default {
     photo() {
       this.$refs.photoToAnalyze.tookPhoto(this.$refs.webcam.capture());
     },
+    uploadFile() {
+      this.$refs.uploadFile.inputFile();
+    },
     changeCamera() {
       this.$refs.webcam.changeCamera();
     },
@@ -69,3 +58,10 @@ export default {
   }
 };
 </script>
+
+<style>
+#menuMobile {
+  position: fixed;
+  bottom: 0px;
+}
+</style>
