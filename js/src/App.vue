@@ -12,14 +12,16 @@
         @load="onFileUploaded"
         hidden
         disablePreview>
-        <vue-base64-file-upload/>
+      </vue-base64-file-upload>
 
     <analyze-photo ref="photoToAnalyze"></analyze-photo>
 
-      <md-bottom-bar class="menuMobile" md-sync-route md-active-item=cameraApp>
-        <md-bottom-bar-item @click="uploadFile()" md-label="Load Image" md-icon="add"></md-bottom-bar-item>
-        <md-bottom-bar-item id="cameraApp" @click="photo()" md-label="Take Photo" md-icon="camera"></md-bottom-bar-item>
-        <md-bottom-bar-item to="/settings" md-label="Settings" md-icon="settings"></md-bottom-bar-item>
+      <md-bottom-bar md-sync-route md-active-item=cameraApp>
+        <div id="menuItemsMobile" class="centered">
+          <md-bottom-bar-item @click="uploadFile()" md-label="Load Image" md-icon="add"></md-bottom-bar-item>
+          <md-bottom-bar-item id="cameraApp" @click="photo()" md-label="Take Photo" md-icon="camera"></md-bottom-bar-item>
+          <md-bottom-bar-item to="/settings" md-label="Settings" md-icon="settings"></md-bottom-bar-item>
+        </div>
       </md-bottom-bar>
 
   </div>
@@ -58,10 +60,10 @@ export default {
   }
 };
 </script>
-
 <style>
 #menuMobile {
   position: fixed;
   bottom: 0px;
+  width: 100%;
 }
 </style>

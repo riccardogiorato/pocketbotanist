@@ -1,6 +1,6 @@
 <template>
     <div class="splashscreen">
-        <img src="../../../design/logo.jpg" class="centeredImage"/>
+        <img src="../../../design/logo.jpg" class="centered"/>
         <h1 class="md-display-2 greenB center">Your pocket botanist</h1>
         <p class="md-subheading greenB">
             "Botany is the science in which plants are known by their aliases."
@@ -20,7 +20,7 @@ export default {
       this.progress = 1;
       setTimeout(() => {
         this.$router.push('/guide');
-      }, 2000);
+      }, 3000);
     }
   },
   mounted() {
@@ -34,10 +34,12 @@ export default {
     if (this.progress === 5) {
       setTimeout(() => {
         this.$router.push('/app');
-      }, 2000);
+      }, 3000);
     }
     if (this.progress !== 5) {
-      this.$router.push('/guide');
+      setTimeout(() => {
+        this.$router.push('/guide');
+      }, 3000);
     }
   },
   watch: {

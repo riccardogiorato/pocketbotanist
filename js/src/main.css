@@ -26,7 +26,7 @@ img {
     text-align: center !important;
 }
 
-.centeredImage {
+.centered {
     margin: 0 auto;
     display: block;
 }
