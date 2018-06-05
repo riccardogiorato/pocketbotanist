@@ -13,7 +13,7 @@ export class PredictAlgorithmia {
    */
   constructor() {
     this.apiKey = "simj8qWc7hacc8hWeSw6e+oJe/d1";
-    this.projectName = "riccardogiorato/yourPocketbotanist/0.1.1";
+    this.projectName = "riccardogiorato/yourPocketbotanist/1.0.0";
   } // constructor
 
   /**

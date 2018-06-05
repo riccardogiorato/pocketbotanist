@@ -1,7 +1,7 @@
 <template>
     <div>
         
-        <md-progress-spinner :md-diameter="150" :md-stroke="10" md-mode="determinate" :md-value="progress" class="spinner"></md-progress-spinner>
+        <md-progress-spinner :md-diameter="150" :md-stroke="10" md-mode="indeterminate" :md-value="progress" class="spinner"></md-progress-spinner>
 
     </div>
 </template>
@@ -50,24 +50,27 @@ export default {
           this.flowerFoundAlgo = await this.predictAlgorithmiaTensorflow(
             BGRImage.toDataURL()
           );
+
           this.progress = 80;
 
-          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+          //this.flowerClass = await this.predictLocalTensorflow(BGRImage);
 
           this.progress = 100;
 
-          console.log(this.flowerClass);
-          //this.flowerClass[0].value, this.flowerClass[0].label);
+          if (true) {
+            localStorage.setItem(
+              'whatFound',
+              JSON.stringify('We found a ' + this.flowerFoundAlgo.label)
+            );
 
-          localStorage.setItem(
-            'whatFound',
-            JSON.stringify('We found a ' + this.flowerClass[0].label)
-          );
-
-          localStorage.setItem(
-            'precision',
-            JSON.stringify(this.flowerClass[0].value)
-          );
+            localStorage.setItem(
+              'precision',
+              JSON.stringify(this.flowerFoundAlgo.value)
+            );
+          } else {
+            // local tensorflow is bugged
+            console.log(this.flowerClass.label, this.flowerClass.value);
+          }
 
           this.$router.push('/result');
         };
@@ -95,7 +98,7 @@ export default {
       let result = this.tensorflowLocal.predict(pixels);
       const topK = await this.tensorflowLocal.getFoundClasse(result);
       this.tensorflowLocal.dispose();
-      return topK;
+      return topK[0];
     },
 
     /**
@@ -104,7 +107,7 @@ export default {
      */
     predictAlgorithmiaTensorflow: async function(img) {
       const algorithmia = new PredictAlgorithmia();
-      return algorithmia.predict(img);
+      return JSON.parse(await algorithmia.predict(img));
     },
 
     /**

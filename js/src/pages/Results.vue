@@ -12,7 +12,7 @@
 
       <md-card-header>
         <div class="md-title">{{whatFound}}</div>
-        <div v-if="precision > 0" class="md-subhead">We are 78% sure about this prediction</div>
+        <div v-if="precision > 0" class="md-subhead">We are {{precision}}% sure about this prediction</div>
       </md-card-header>
 
       <md-card-expand v-if="precision > 0">
@@ -50,7 +50,9 @@ export default {
       this.whatFound = JSON.parse(localStorage.getItem('whatFound'));
 
     if (localStorage.getItem('precision'))
-      this.precision = JSON.parse(localStorage.getItem('precision'));
+      this.precision = Math.trunc(
+        100 * JSON.parse(localStorage.getItem('precision'))
+      );
   },
   components: {
     GoBack
