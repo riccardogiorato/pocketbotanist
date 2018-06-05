@@ -11,6 +11,8 @@ import Splashscreen from './pages/SplashScreen';
 import App from './pages/App.vue';
 import Loading from './pages/Loading.vue';
 import Settings from './pages/Settings.vue';
+import Results from './pages/Results.vue';
+
 
 Vue.use(VueRouter);
 Vue.use(VueMaterial);
@@ -37,6 +39,10 @@ const routes = [{
     {
       path: '/settings',
       component: Settings
+    },
+    {
+      path: '/result',
+      component: Results
     }
   ]
 }]

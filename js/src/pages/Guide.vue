@@ -19,12 +19,12 @@
           <br/>
           What do you prefer?
         </p>
-        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote(0)">Local broswer</md-button>
-        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote(1)">Remote server</md-button>
-        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote(2)">Both</md-button>
+        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('0')">Local broswer</md-button>
+        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('1')">Remote server</md-button>
+        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('2')">Both</md-button>
       </md-step>
 
-      <md-step id="third" md-label="Help" :md-done.sync="third">
+      <md-step id="third" md-label="Telemetry" :md-done.sync="third">
         <p class="md-title greenB center">
         Do you want to help us? </p>
         <p class="md-subheading greyT center">

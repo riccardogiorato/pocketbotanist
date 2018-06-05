@@ -1,5 +1,7 @@
 <template>
-        <analyze-photo ref="photoToAnalyze"></analyze-photo>
+  <div>
+    <analyze-photo ref="photoToAnalyze"></analyze-photo>
+  </div>
 </template>
 <script>
 import AnalyzePhoto from '../components/AnalyzePhoto';
@@ -10,7 +12,7 @@ export default {
       this.photo = JSON.parse(localStorage.getItem('photo'));
       this.$refs.photoToAnalyze.tookPhoto(this.photo);
     } else {
-      this.$router.go(-1); // go back
+      this.$router.go('/app');
     }
   },
   components: {

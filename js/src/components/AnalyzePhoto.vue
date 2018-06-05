@@ -1,18 +1,7 @@
 <template>
     <div>
-        <img id="flower" class="takenImage" v-bind:src="imgSrc" />
-        <div id="results">
-        </div>
-        <div v-if="loading" id="resultsSpinn" class="loader"></div>
-        <div v-else >
-          <p v-html="flowerFoundClarifai"></p>
-          Remote Tensorflow
-          <p v-html="flowerFoundAlgo"></p>
-          And finally Local Tensorflow
-          <p v-html="flowerClass"></p>
-        </div>
-
-<a href="/app"><md-icon class="iconBig">arrow_back</md-icon></a>
+        
+        <md-progress-spinner :md-diameter="150" :md-stroke="10" md-mode="determinate" :md-value="progress" class="spinner"></md-progress-spinner>
 
     </div>
 </template>
@@ -27,13 +16,12 @@ export default {
   data() {
     return {
       network_width: 227,
-      loading: false,
-      imgSrc: null,
       flowerFoundClarifai: '',
       flowerFound: false,
       flowerClass: '',
       flowerFoundAlgo: '',
-      tensorflowLocal: new ModelLoader()
+      tensorflowLocal: new ModelLoader(),
+      progress: 20
     };
   },
   methods: {
@@ -47,8 +35,8 @@ export default {
       this.flowerClass = '';
       this.flowerFoundAlgo = '';
 
-      this.loading = true;
       if (await this.predictClarifai(valueImg)) {
+        this.progress = 40;
         //create temp image
         var img = new Image();
         img.src = valueImg;
@@ -58,16 +46,41 @@ export default {
           ResizedImage = this.cropcenter(ResizedImage, this.network_width);
 
           const BGRImage = this.RGBtoBGR(ResizedImage, this.network_width);
-
-          this.flowerFoundAlgo =
-            '<h2>' +
-            (await this.predictAlgorithmiaTensorflow(BGRImage.toDataURL())) +
-            '</h2>';
+          this.progress = 60;
+          this.flowerFoundAlgo = await this.predictAlgorithmiaTensorflow(
+            BGRImage.toDataURL()
+          );
+          this.progress = 80;
 
           this.flowerClass = await this.predictLocalTensorflow(BGRImage);
-          this.loading = false;
+
+          this.progress = 100;
+
+          console.log(this.flowerClass);
+          //this.flowerClass[0].value, this.flowerClass[0].label);
+
+          localStorage.setItem(
+            'whatFound',
+            JSON.stringify('We found a ' + this.flowerClass[0].label)
+          );
+
+          localStorage.setItem(
+            'precision',
+            JSON.stringify(this.flowerClass[0].value)
+          );
+
+          this.$router.push('/result');
         };
         await img;
+      } else {
+        localStorage.setItem(
+          'whatFound',
+          JSON.stringify("There isn't a flower in the photo sorry...😢")
+        );
+
+        localStorage.setItem('precision', JSON.stringify(0));
+
+        this.$router.push('/result');
       }
     },
 
@@ -80,9 +93,9 @@ export default {
       const pixels = tfc.fromPixels(img);
 
       let result = this.tensorflowLocal.predict(pixels);
-      const topK = this.tensorflowLocal.getFoundClasse(result);
+      const topK = await this.tensorflowLocal.getFoundClasse(result);
       this.tensorflowLocal.dispose();
-      return "<h2>It's a " + topK[0].label + '</h2><br>';
+      return topK;
     },
 
     /**
@@ -105,15 +118,6 @@ export default {
       const base64img = img.substring(23);
       // predict with clarifai API
       const found = await clarifai.isThereAFlower(base64img);
-      if (found) this.flowerFoundClarifai = "There's a flower here 🌺";
-      else
-        this.flowerFoundClarifai =
-          "<h3>There isn't a flower in the photo sorry...😢 </h3>";
-
-      console.log(found, this.flowerFoundClarifai);
-
-      this.flowerFound = found;
-
       return found;
     },
     /**
@@ -225,9 +229,3 @@ export default {
   }
 };
 </script>
-<style>
-.iconBig {
-  font-size: 60px !important;
-  margin: auto 15px;
-}
-</style>

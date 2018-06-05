@@ -1,8 +1,8 @@
 <template>
     <div class="splashscreen">
-        <img src="../../../design/logo.jpg" class="centered"/>
+        <img src="../../../design/logo.jpg" class="centered splashlogo"/>
         <h1 class="md-display-2 greenB center">Your pocket botanist</h1>
-        <p class="md-subheading greenB">
+        <p class="md-subheading greenB center">
             "Botany is the science in which plants are known by their aliases."
         </p>
     </div>
@@ -52,13 +52,3 @@ export default {
   }
 };
 </script>
-
-
-<style scoped>
-.splashscreen {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-</style>
