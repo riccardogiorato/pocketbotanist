@@ -6,7 +6,7 @@
     </div>
 </template>
 <script>
-import * as tfc from '@tensorflow/tfjs-core';
+import { fromPixels } from '@tensorflow/tfjs-core';
 import { ModelLoader } from '../machine_learning/ModelLoader';
 import { PredictClarifai } from '../machine_learning/PredictClarifai';
 import { PredictAlgorithmia } from '../machine_learning/PredictAlgorithmia';
@@ -55,7 +55,9 @@ export default {
 
           this.progress = 80;
 
-          //this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+
+          alert(this.flowerClass.label + ' ' + this.flowerClass.value);
 
           this.progress = 100;
 
@@ -104,10 +106,12 @@ export default {
      */
     predictLocalTensorflow: async function(img) {
       await this.tensorflowLocal.load();
-      const pixels = tfc.fromPixels(img);
+      const pixels = fromPixels(img);
 
       let result = this.tensorflowLocal.predict(pixels);
-      const topK = await this.tensorflowLocal.getFoundClasse(result);
+
+      const topK = this.tensorflowLocal.getTopKClasses(result, 5);
+
       this.tensorflowLocal.dispose();
       return topK[0];
     },

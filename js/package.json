@@ -12,8 +12,7 @@
     "clean": "RMDIR  dist /S /Q && RMDIR  public /S /Q && RMDIR  .cache /S /Q"
   },
   "dependencies": {
-    "@tensorflow/tfjs-converter": "0.3.1",
-    "@tensorflow/tfjs-core": "0.10.0",
+    "@tensorflow/tfjs": "0.11.2",
     "@vue/component-compiler-utils": "^1.0.0",
     "clang-format": "~1.2.2",
     "clarifai": "^2.7.1",

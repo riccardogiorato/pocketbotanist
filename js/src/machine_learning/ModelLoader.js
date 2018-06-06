@@ -1,7 +1,12 @@
-import * as tfc from "@tensorflow/tfjs-core";
 import {
+  div,
+  sub,
+  tidy,
+  softmax,
+  scalar,
   loadFrozenModel
-} from "@tensorflow/tfjs-converter/dist/executor/frozen_model";
+} from "@tensorflow/tfjs";
+
 import {
   IMAGE_CLASSES
 } from "../classes";
@@ -12,7 +17,7 @@ const MODEL_FILE_URL = "tensorflowjs_model.pb";
 const WEIGHT_MANIFEST_FILE_URL = "weights_manifest.json";
 const INPUT_NODE_NAME = "Placeholder";
 const OUTPUT_NODE_NAME = "loss";
-const PREPROCESS_DIVISOR = tfc.scalar(255 / 2);
+const PREPROCESS_DIVISOR = scalar(255 / 2);
 
 /**
  * This class loads your custom frozen tensorflow model
@@ -49,19 +54,14 @@ export class ModelLoader {
    * @return The logits.
    */
   predict(input) {
-    const preprocessedInput = tfc.div(
-      tfc.sub(input.asType("float32"), PREPROCESS_DIVISOR),
-      PREPROCESS_DIVISOR
-    );
-    const reshapedInput = preprocessedInput.reshape([
-      1,
-      ...preprocessedInput.shape
-    ]);
+    const preprocessedInput = div(
+      sub(input.asType('float32'), PREPROCESS_DIVISOR),
+      PREPROCESS_DIVISOR);
+    const reshapedInput =
+      preprocessedInput.reshape([1, ...preprocessedInput.shape]);
     return this.model.execute({
-        [INPUT_NODE_NAME]: reshapedInput
-      },
-      OUTPUT_NODE_NAME
-    );
+      [INPUT_NODE_NAME]: reshapedInput
+    }, OUTPUT_NODE_NAME);
   }
 
   /**
@@ -69,7 +69,7 @@ export class ModelLoader {
    * @param {*} predictions the return from predict function
    */
   getFoundClasse(predictions) {
-    const preds = this.getTopKClasses(predictions, 5);
+    const preds = this.getTopKClasses(predictions, 7);
     console.dir(preds);
     return preds;
   }
@@ -79,7 +79,11 @@ export class ModelLoader {
    * @param {*} predictions the return from predict function
    * @param {*} topK number of predictions to return
    */
-  getTopKClasses(predictions, topK) {
+  getTopKClasses(logits, topK) {
+    const predictions = tidy(() => {
+      return softmax(logits);
+    });
+
     const values = predictions.dataSync();
     predictions.dispose();
 
@@ -90,15 +94,12 @@ export class ModelLoader {
         index: i
       });
     }
-
-    // reorder the predictions from the biggest to the smallest one
     predictionList = predictionList
       .sort((a, b) => {
         return b.value - a.value;
       })
       .slice(0, topK);
 
-    // map the prediction to the right label
     return predictionList.map(x => {
       return {
         label: IMAGE_CLASSES[x.index],

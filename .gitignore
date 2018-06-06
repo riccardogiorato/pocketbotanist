@@ -3,6 +3,7 @@ node_modules/
 js/node_modules/
 js/public/
 js/.cache/
+js/report.html
 
 # Webstorm
 .idea/
