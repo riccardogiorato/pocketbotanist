@@ -7,7 +7,7 @@
 
       <md-card md-with-hover class="results">
       <md-card-media>
-        <img v-bind:src="photo" alt="flower">
+        <img :style="'height:'+height+'px !important;'" v-bind:src="photo" alt="flower">
       </md-card-media>
 
       <md-card-header>
@@ -39,7 +39,8 @@ export default {
     return {
       photo: null,
       whatFound: '',
-      precision: 0
+      precision: 0,
+      height: 0
     };
   },
   mounted() {
@@ -53,6 +54,9 @@ export default {
       this.precision = Math.trunc(
         100 * JSON.parse(localStorage.getItem('precision'))
       );
+
+    if (localStorage.getItem('height'))
+      this.height = JSON.parse(localStorage.getItem('height'));
   },
   components: {
     GoBack

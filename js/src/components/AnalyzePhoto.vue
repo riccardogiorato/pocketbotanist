@@ -42,6 +42,8 @@ export default {
         img.src = valueImg;
 
         img.onload = async () => {
+          localStorage.setItem('height', JSON.stringify(img.height));
+
           let ResizedImage = this.resizeImg256(img);
           ResizedImage = this.cropcenter(ResizedImage, this.network_width);
 
@@ -76,6 +78,15 @@ export default {
         };
         await img;
       } else {
+        // no flower in the image
+        var img = new Image();
+
+        img.onload = function() {
+          localStorage.setItem('height', JSON.stringify(img.height));
+        };
+
+        img.src = valueImg;
+
         localStorage.setItem(
           'whatFound',
           JSON.stringify("There isn't a flower in the photo sorry...😢")

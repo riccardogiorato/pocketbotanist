@@ -70,11 +70,10 @@ canvas {
 
 .results {
     margin: 4%;
-    max-width: 500px;
+    max-width: 90%;
 }
 
 .results img {
-    max-height: 400px;
     object-fit: cover;
 }
 
