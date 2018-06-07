@@ -2,10 +2,13 @@
   "name": "yourpocketbotanist",
   "version": "0.0.1",
   "title": "your Pocket botanist",
-  "homepage": "http://pocketbotanist.ml",
-  "main": "index.js",
+  "homepage": "https://pocketbotanist.ml",
   "license": "MIT",
   "private": true,
+  "author": {
+    "name": "Riccardo Giorato",
+    "url": "https://riccardogiorato.com"
+  },
   "scripts": {
     "start": "parcel src/index.html --no-hmr --open --hmr-hostname 192.168.1.66 --https --no-cache",
     "build": "parcel build src/index.html -d public --public-url ./",
@@ -13,19 +16,17 @@
   },
   "dependencies": {
     "@tensorflow/tfjs": "0.11.2",
-    "@vue/component-compiler-utils": "^1.0.0",
-    "clang-format": "~1.2.2",
     "clarifai": "^2.7.1",
     "parcel-bundler": "~1.7.0",
     "vue": "^2.5.16",
-    "vue-base64-file-upload": "^1.0.4",
-    "vue-hot-reload-api": "^2.3.0",
     "vue-material": "^1.0.0-beta-10.2",
-    "vue-router": "^3.0.1",
-    "vue-template-compiler": "^2.5.16",
-    "vue-web-cam": "1.0.2"
+    "vue-router": "^3.0.1"
   },
   "devDependencies": {
+    "clang-format": "~1.2.2",
+    "@vue/component-compiler-utils": "^1.0.0",
+    "vue-template-compiler": "^2.5.16",
+    "vue-hot-reload-api": "^2.3.0",
     "node-sass": "^4.9.0",
     "parcel-plugin-bundle-visualiser": "^1.1.2"
   }

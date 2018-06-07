@@ -33,4 +33,6 @@ Their VM are hosted in AWS and can be easily launched with a simple CLI.
     1.  output_graph.pb
     2.  output_labels.txt
 
-# Run the training over mobilenet with images from data folder
+## Download those two files and enjoy your Tensorflow model anywhere you want!
+
+You can use it on Algorithmia.com or port them to js.tensorflow.org

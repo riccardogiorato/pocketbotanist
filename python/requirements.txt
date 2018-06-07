@@ -2,3 +2,4 @@
 clarifai
 tensorflow
 tensorflowjs
+jupyter

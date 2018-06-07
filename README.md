@@ -10,13 +10,18 @@
 
 **Table of Contents**
 
+- [design](./design)
+- [docs](./docs)
+- [js](./js)
+- [pyhton](./pyhton)
+- [tensorflow_model_pb](./tensorflow_model_pb)
+- [transfer_learning](./transfer_learning)
+
 ## Basic Overview
 
 ## Installation
 
 ## Usage
-
-## Notes
 
 #### Frontend Hosting
 

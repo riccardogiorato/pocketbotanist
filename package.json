@@ -2,22 +2,20 @@
   "name": "yourpocketbotanist",
   "version": "0.0.1",
   "title": "your Pocket botanist",
-  "homepage": "http://pocketbotanist.ml",
-  "main": "index.js",
+  "homepage": "https://pocketbotanist.ml",
   "license": "MIT",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/Giorat/cognitive_services"
+    "url": "https://github.com/Giorat/pocketbotanist"
   },
   "author": {
     "name": "Riccardo Giorato",
     "url": "https://riccardogiorato.com"
   },
   "scripts": {
-    "js": "cd js && yarn start",
-    "python": "cd python && pip install requiriments.txt",
-  },
-  "dependencies": {},
-  "devDependencies": {}
+    "js": "cd js && yarn install && yarn start",
+    "python_notebook": "cd python && pip3 install requiriments.txt && jupyter notebook",
+    "transfer_learning": "cd transfer_learning && pip3 install floyd_requirements.txt"
+  }
 }
