@@ -1,5 +1,11 @@
+@import "node_modules/vue-material/dist/theme/engine"; // Import the theme engine
+@include md-register-theme("default", ( primary: #0F8903, // The primary color of your brand
+accent: #1a11e8 // The secondary color of your brand
+));
+@import "node_modules/vue-material/dist/theme/all"; // Apply the theme
+//
 body {
-    font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+    font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
 }
 
 img {
@@ -11,16 +17,38 @@ img {
     width: 100%;
 }
 
+#webcam-view {
+    width: 100%;
+    height: 99 vh;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+#webcamFeed {
+    width: 100vw;
+    height: 100%;
+    object-fit: cover;
+    min-width: 100%;
+    min-height: 100%;
+}
+
+#changeCamera {
+    top: -50px;
+    background: white;
+    margin: 0 auto;
+    display: block;
+}
+
 .takenImage {
     display: none;
 }
 
 .greenB {
-    color: #0F8903 !important;
+    color: #0f8903 !important;
 }
 
 .greenBG {
-    background: #0F8903 !important;
+    background: #0f8903 !important;
 }
 
 .greyT {
@@ -79,18 +107,18 @@ canvas {
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .5s ease;
+    transition: opacity 0.5s ease;
 }
 
 .fade-enter,
 .fade-leave-active {
-    opacity: 0
+    opacity: 0;
 }
 
 .child-view {
     width: 100%;
     position: absolute;
-    transition: all .5s cubic-bezier(.55, 0, .1, 1);
+    transition: all 0.5s cubic-bezier(0.55, 0, 0.1, 1);
 }
 
 .slide-left-enter,

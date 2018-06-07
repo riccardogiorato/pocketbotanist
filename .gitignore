@@ -5,6 +5,9 @@ js/public/
 js/.cache/
 js/report.html
 
+# training_mobilenet
+training_mobilenet/data/*
+
 # Webstorm
 .idea/
 

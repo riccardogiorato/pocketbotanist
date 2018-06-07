@@ -19,9 +19,11 @@
           <br/>
           What do you prefer?
         </p>
-        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('0')">Local broswer</md-button>
-        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('1')">Remote server</md-button>
-        <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('2')">Both</md-button>
+        <div class="center">
+          <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('0')">Local broswer</md-button>
+          <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('1')">Remote server</md-button>
+          <md-button class="md-raised md-primary" @click="machineLearningProviderRemote('2')">Both</md-button>
+        </div>
       </md-step>
 
       <md-step id="third" md-label="Telemetry" :md-done.sync="third">
@@ -30,8 +32,10 @@
         <p class="md-subheading greyT center">
         Can we use your photos to improve our visual model?
         </p>
-        <md-button class="md-raised md-primary" @click="canUsePhotos(true)">Sure</md-button>
-        <md-button class="md-raised" @click="canUsePhotos(false)">No</md-button>
+        <div class="center">        
+          <md-button class="md-raised md-primary" @click="canUsePhotos(true)">Sure</md-button>
+          <md-button class="md-raised" @click="canUsePhotos(false)">No</md-button>
+        </div>
       </md-step>
     </md-steppers>
   </div>

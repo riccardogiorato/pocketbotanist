@@ -171,26 +171,3 @@ export default {
   }
 };
 </script>
-<style>
-#webcam-view {
-  width: 100%;
-  height: 80vh;
-  margin: 0 auto;
-  overflow: hidden;
-}
-
-#webcamFeed {
-  width: 100vw;
-  height: 100%;
-  object-fit: cover;
-  min-width: 100%;
-  min-height: 100%;
-}
-
-#changeCamera {
-  top: -50px;
-  background: white;
-  margin: 0 auto;
-  display: block;
-}
-</style>

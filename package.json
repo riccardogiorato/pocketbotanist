@@ -20,6 +20,8 @@
     "python": "cd python && pip install requiriments.txt",
     "docsbuild": "cd website && yarn run build"
   },
-  "dependencies": {},
+  "dependencies": {
+    "node-sass": "^4.9.0"
+  },
   "devDependencies": {}
 }
