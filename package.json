@@ -15,13 +15,9 @@
     "url": "https://riccardogiorato.com"
   },
   "scripts": {
-    "docs": "cd website && yarn start",
     "js": "cd js && yarn start",
     "python": "cd python && pip install requiriments.txt",
-    "docsbuild": "cd website && yarn run build"
   },
-  "dependencies": {
-    "node-sass": "^4.9.0"
-  },
+  "dependencies": {},
   "devDependencies": {}
 }

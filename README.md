@@ -1,4 +1,6 @@
-<img src="./design/logo.jpg" style="max-width: 100%;width: 200px;margin: 0 auto;display: block;"/>
+<p align="center">
+    <img src="./design/logo.jpg" width="200px"/>
+</p>
 
 # your Pocket botanist
 
