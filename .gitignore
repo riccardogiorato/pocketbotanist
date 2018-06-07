@@ -6,7 +6,7 @@ js/.cache/
 js/report.html
 
 # training_mobilenet
-training_mobilenet/data/*
+transfer_learning/data/*
 
 # Webstorm
 .idea/
