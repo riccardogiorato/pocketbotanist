@@ -5,7 +5,10 @@ js/public/
 js/.cache/
 js/report.html
 
-# training_mobilenet
+# Pyhton notebooks ipynb_checkpoints
+python/.ipynb_checkpoints
+
+# Training_mobilenet
 transfer_learning/data/*
 
 # Webstorm

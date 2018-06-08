@@ -1,5 +1,9 @@
-# packages for python scripts
 clarifai
-tensorflow
+matplotlib
+numpy
+opencv-python
+pillow
+scikit-image
+tensorflow==1.7
 tensorflowjs
 jupyter

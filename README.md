@@ -23,10 +23,17 @@
 
 ## Installation
 
+**Prerequisites:** you need to install yarn from [here](https://yarnpkg.com/lang/en/docs/install/) and pip3 with python3 form [here](https://www.python.org/downloads/release/python-365/) then from this folder run in the terminal `yarn install`
+
 ## Usage
+
+- To run the Vue application run `yarn js`
+- To run the Pyhton notebooks `yarn python`
+- To run the Transfer Learning `yarn transfer-learning`
 
 #### Frontend Hosting
 
+Thanks to
 <a href="https://www.netlify.com">
-  <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
+<img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
 </a>
