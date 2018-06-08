@@ -18,19 +18,20 @@ Build production app
 `yarn build`
 
 On netlify I used the custom command `cd js; yarn install; yarn run build; cp src/_redirects public/`
- 
 
 ## Libraries and Modules used
+
 - vue as UI framework to build different pages
-- clarifai to conncet to their general model to find a flower, [code here](./src/machinea_learning/PredictClarifai.js);
+- clarifai to conncet to their general model to find a flower, [code here](./src/machine_learning/PredictClarifai.js);
 - vue-router to manage different pages/URL from [index.js](./src/index.js);
 - vue-material to create easily a nice material user interface, [pages here](./src/pages);
-- Algorithmia.js to predict flower class from the serverless function deployed on Algorithmia, [code here]()(./src/machinea_learning/PredictAlgorithmia.js);
-- tensorflow/tfjs to run the locally inside the browser the trained frozen model, [code here](./src/machinea_learning/ModelLoader.js).
+- Algorithmia.js to predict flower class from the serverless function deployed on Algorithmia, [code here]()(./src/machine_learning/PredictAlgorithmia.js);
+- tensorflow/tfjs to run the locally inside the browser the trained frozen model, [code here](./src/machine_learning/ModelLoader.js).
 
 ## Notes
-- _redirects file inside the src folder is needed to let netlify serve the index.html as a single page application source. 
-- _headers inside the assets folder is used because the assets folder is deployed to [subdomain](https://models.pocketbotanist.ml) with CORS(Cross origin request) enabled thanks to that file config.
+
+- \_redirects file inside the src folder is needed to let netlify serve the index.html as a single page application source.
+- \_headers inside the assets folder is used because the assets folder is deployed to [subdomain](https://models.pocketbotanist.ml) with CORS(Cross origin request) enabled thanks to that file config.
 
 #### Frontend Hosting
 

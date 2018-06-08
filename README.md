@@ -4,7 +4,8 @@
 
 # your Pocket botanist
 
-[![GitHub Issues](https://img.shields.io/github/issues/giorat/ELI5.ML.svg)](https://github.com/giorat/ELI5.ML/issues)
+[![Build Status](https://travis-ci.org/Giorat/pocketbotanist.svg?branch=master)](https://travis-ci.org/Giorat/pocketbotanist)
+[![GitHub Issues](https://img.shields.io/github/issues/giorat/pocketbotanist.svg)](https://github.com/giorat/pocketbotanist/issues)
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 
@@ -13,7 +14,7 @@
 - [design](./design)
 - [docs](./docs)
 - [js](./js)
-- [pyhton](./pyhton)
+- [python](./python)
 - [tensorflow_model_pb](./tensorflow_model_pb)
 - [transfer_learning](./transfer_learning)
 
