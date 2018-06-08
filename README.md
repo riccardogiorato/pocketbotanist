@@ -5,6 +5,7 @@
 # your Pocket botanist
 
 [![Build Status](https://travis-ci.org/Giorat/pocketbotanist.svg?branch=master)](https://travis-ci.org/Giorat/pocketbotanist)
+[![Known Vulnerabilities](https://snyk.io/test/github/Giorat/pocketbotanist/badge.svg?targetFile=js%2Fpackage.json)](https://snyk.io/test/github/Giorat/pocketbotanist?targetFile=js%2Fpackage.json)
 [![GitHub Issues](https://img.shields.io/github/issues/giorat/pocketbotanist.svg)](https://github.com/giorat/pocketbotanist/issues)
 ![Contributions welcome](https://img.shields.io/badge/contributions-welcome-orange.svg)
 [![License](https://img.shields.io/badge/license-MIT-blue.svg)](https://opensource.org/licenses/MIT)
