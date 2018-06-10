@@ -1,0 +1,8 @@
+{
+    "name": "Pocket Botanist",
+    "short_name": "PocketBotanist",
+    "lang": "en-US",
+    "start_url": "/",
+    "display": "standalone",
+    "theme_color": "#0f8903"
+}

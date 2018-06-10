@@ -47,19 +47,18 @@
 
 **Extra goals:**
 
-* test GAN to randomize images of specific types
-* turn all images to black and white to remove bias?
-* port Tensorflow model to JS version https://github.com/tensorflow/tfjs-converter
+- test GAN to randomize images of specific types
+- turn all images to black and white to remove bias?
+- port Tensorflow model to JS version https://github.com/tensorflow/tfjs-converter
 
-  * first convert pb to Saved Model with ckpt and meta, is it possible?
+  - first convert pb to Saved Model with ckpt and meta, is it possible?
 
-* understanding more the model with Tensorboard
-  * to run Tensorboard run 'tensorboard --logdir=./log', url (http://asus-ux310gio:6006/#graphs&run=.)
-* understand which kind of model the microsoft team is using to build models fast in customvision
-* look at Modeldepot
-* classify with Tensorflow model built with Lobe
-* https://greenkeeper.io/
-
+- understanding more the model with Tensorboard
+  - to run Tensorboard run 'tensorboard --logdir=./log', url (http://asus-ux310gio:6006/#graphs&run=.)
+- understand which kind of model the microsoft team is using to build models fast in customvision
+- look at Modeldepot
+- classify with Tensorflow model built with Lobe
+- https://greenkeeper.io/
 
 **API call:**
 https://southcentralus.api.cognitive.microsoft.com/customvision/v2.0/Training/projects/bd1adee5-8e9e-4fe2-a0d8-ea275b91e2be/iterations/e39b2666-938d-4b45-8045-2c548ba2b1ad/export
@@ -70,8 +69,6 @@ fine tuning
 
 cutting the FC makes the CNN act as a feature extractor and by using really complex ones who has been trained for ages you get good results with short training time
 
-
-
 fine di giugno - 16 june
 fine di luglio - 25 july
 
@@ -79,3 +76,19 @@ fine di luglio - 25 july
 27 june presentation
 report of what I've done
 presentation power point - 15 minutes - 10 slides
+
+**Stats and reports:**
+
+- Top-1 accuracy is the conventional accuracy: the model answer (the one with highest probability) must be exactly the expected answer.
+- Top-2 accuracy means that any of your model 2 highest probability answers must match the expected answer.
+- Top-5 accuracy means that any of your model 5 highest probability answers must match the expected answer.
+
+**TODO:**
+
+- use local images keys not google colab remote ones
+- create Top-1 for Clarifai report
+- create Top-1 and Top-2 for Tensorflow report
+  - custom vision original model with many images of 6 types DATASET1
+  - inception-net floydhub with images DATASET1
+  - mobilenet-v2 floydhub with images DATASET1
+- check if browser supporto webgl to use local tensorflow

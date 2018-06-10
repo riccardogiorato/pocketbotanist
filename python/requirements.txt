@@ -6,4 +6,5 @@ pillow
 scikit-image
 tensorflow==1.7
 tensorflowjs
+tensorboard
 jupyter

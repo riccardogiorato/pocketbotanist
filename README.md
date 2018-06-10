@@ -23,17 +23,34 @@
 
 ## Installation
 
-**Prerequisites:** you need to install yarn from [here](https://yarnpkg.com/lang/en/docs/install/) and pip3 with python3 form [here](https://www.python.org/downloads/release/python-365/) then from this folder run in the terminal `yarn install`
+**Prerequisites:** you need to install yarn from [here](https://yarnpkg.com/lang/en/docs/install/) and pip3 with python3 version 3.6.5 64bit form [here](https://www.python.org/downloads/release/python-365/) then from this folder run in the terminal `yarn install`
+
+## Be sure to run Python 3 and pip3 and 64BIT version of python!!
+
+To check 32 or 64 bit run this in python and look ath the out:
+
+```
+import struct
+print(struct.calcsize("P") * 8)
+```
 
 ## Usage
 
 - To run the Vue application run `yarn js`
-- To run the Pyhton notebooks `yarn python`
-- To run the Transfer Learning `yarn transfer-learning`
+- To run the Pyhton notebooks `yarn python_notebook`
+- To run the Transfer Learning `yarn transfer_learning`
+
+## Dataset
+
+You can use easily the datasets used in this project from flodyhub:
+
+- [training image dataset](https://www.floydhub.com/riccardogiorato/datasets/pocketbotanist-training), 7 classes \* 700 images = 4900 total images
+- [testing image dataset](https://www.floydhub.com/riccardogiorato/datasets/pocketbotanist-test), 7 classes \* 50 images = 350 total images
 
 #### Frontend Hosting
 
-Thanks to
+**Thanks to Netlify**
+
 <a href="https://www.netlify.com">
 <img src="https://www.netlify.com/img/global/badges/netlify-color-bg.svg"/>
 </a>

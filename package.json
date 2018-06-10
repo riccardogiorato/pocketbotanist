@@ -16,10 +16,10 @@
   "scripts": {
     "install": "yarn install-js && yarn install-py && yarn install-tl",
     "install-js": "cd js && yarn install",
-    "install-py": "cd python && pip3 install -r requirements.txt",
-    "install-tl": "cd transfer_learning && pip3 install -r floyd_requirements.txt && echo '!!! read the README to do Transfer Learning!!!'",
+    "install-py": "cd python && python -m pip install -r requirements.txt",
+    "install-tl": "cd transfer_learning && python -m pip install -r floyd_requirements.txt && echo '!!! read the README to do Transfer Learning!!!'",
     "js": "cd js && yarn start",
-    "python_notebook": "cd python  && jupyter notebook",
+    "python_notebook": "cd python  && yarn start",
     "transfer_learning": "cd transfer_learning && python retrain.py --image_dir ./data/"
   }
 }

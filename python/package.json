@@ -1,0 +1,6 @@
+{
+  "scripts": {
+    "tensorboard": "python pb_to_tensorboard.py && tensorboard --logdir=run1:./log",
+    "start": "jupyter notebook"
+  }
+}
