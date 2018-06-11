@@ -15,7 +15,7 @@
     "clean": "RMDIR  dist /S /Q && RMDIR  public /S /Q && RMDIR  .cache /S /Q"
   },
   "dependencies": {
-    "@tensorflow/tfjs": "0.11.5",
+    "@tensorflow/tfjs": "0.11.6",
     "clarifai": "^2.7.1",
     "parcel-bundler": "~1.8.1",
     "vue": "^2.5.16",
