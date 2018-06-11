@@ -26,9 +26,6 @@ const PREPROCESS_DIVISOR = scalar(255 / 2);
  * @class ModelLoader
  */
 export class ModelLoader {
-  constructor() {
-    console.log("building tensorflow")
-  }
 
   /**
    * load the remote tensorflow model and weight

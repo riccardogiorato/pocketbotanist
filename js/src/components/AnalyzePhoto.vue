@@ -1,7 +1,7 @@
 <template>
     <div>
         
-        <md-progress-spinner :md-diameter="150" :md-stroke="10" md-mode="indeterminate" :md-value="progress" class="spinner"></md-progress-spinner>
+        <md-progress-spinner :md-diameter="150" :md-stroke="10" :md-value="progress" class="spinner"></md-progress-spinner>
 
     </div>
 </template>
@@ -55,9 +55,8 @@ export default {
 
           this.progress = 80;
 
-          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
-
-          alert(this.flowerClass.label + ' ' + this.flowerClass.value);
+          //this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+          //alert(this.flowerClass.label + ' ' + this.flowerClass.value);
 
           this.progress = 100;
 
@@ -73,7 +72,6 @@ export default {
             );
           } else {
             // local tensorflow is bugged
-            console.log(this.flowerClass.label, this.flowerClass.value);
           }
 
           this.$router.push('/result');
