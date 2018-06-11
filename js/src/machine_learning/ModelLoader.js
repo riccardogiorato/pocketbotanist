@@ -27,7 +27,7 @@ const PREPROCESS_DIVISOR = scalar(255 / 2);
  */
 export class ModelLoader {
   constructor() {
-
+    console.log("building tensorflow")
   }
 
   /**

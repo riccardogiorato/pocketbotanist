@@ -172,7 +172,6 @@ export default {
     disableSmoothCanvas: function(ctx) {
       ctx.imageSmoothingEnabled = false;
       ctx.webkitImageSmoothingEnabled = false;
-      ctx.mozImageSmoothingEnabled = false;
       ctx.msImageSmoothingEnabled = false;
       ctx.oImageSmoothingEnabled = false;
     },
