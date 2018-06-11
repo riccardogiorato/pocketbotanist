@@ -14,7 +14,7 @@
     "url": "https://riccardogiorato.com"
   },
   "scripts": {
-    "install": "yarn install-js && yarn install-py && yarn install-tl",
+    "install-all": "yarn install-js && yarn install-py && yarn install-tl",
     "install-js": "cd js && yarn install",
     "install-py": "cd python && python -m pip install -r requirements.txt",
     "install-tl": "cd transfer_learning && python -m pip install -r floyd_requirements.txt && echo '!!! read the README to do Transfer Learning!!!'",

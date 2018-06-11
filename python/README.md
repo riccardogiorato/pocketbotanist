@@ -49,9 +49,10 @@ To visualized the images not founded look at  [the notebook](./testing-clarifai.
 
 ### Tensorflow
 
+| Model name/source | Top-1 | Top-5 | Size MB | Avg exec 1 image |
+| ----------------- | ----- | ----- | ------- | ---------------- |
+| Custom-Vision     | 52%   | 98%   | 3 MB    | 0.366s           |
+| Mobilenet-V2      | 64%   | 96%   | 8 MB    | 0.899s           |
+| Inception V3      | 66%   | 96%   | 80 MB   | 4.996s           |
 
-| Model name/source | Top-1 | Top-5 | Size MB |
-| ----------------- | ----- | ----- | ------- |
-| Custom-Vision     | 0     | 0     | 3 MB    |
-| Inception V3      | 0     | 0     | 80 MB   |
-| Mobilenet-V2      | 0     | 0     | 8 MB    |
+![top-1](./img/top-1.png)

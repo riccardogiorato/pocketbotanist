@@ -23,7 +23,7 @@
 
 ## Installation
 
-**Prerequisites:** you need to install yarn from [here](https://yarnpkg.com/lang/en/docs/install/) and pip3 with python3 version 3.6.5 64bit form [here](https://www.python.org/downloads/release/python-365/) then from this folder run in the terminal `yarn install`
+**Prerequisites:** you need to install yarn from [here](https://yarnpkg.com/lang/en/docs/install/) and pip3 with python3 version 3.6.5 64bit form [here](https://www.python.org/downloads/release/python-365/) then from this folder run in the terminal `yarn install-all`
 
 ## Be sure to run Python 3 and pip3 and 64BIT version of python!!
 
