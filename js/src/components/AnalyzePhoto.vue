@@ -54,12 +54,12 @@ export default {
 
           this.progress = 80;
 
-          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
-          console.log(
+          //this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+          /*console.log(
             'tensorflow local',
             this.flowerClass.label,
             this.flowerClass.value
-          );
+          );*/
 
           this.progress = 100;
 
