@@ -20,7 +20,6 @@ export default {
       flowerFound: false,
       flowerClass: '',
       flowerFoundAlgo: '',
-      tensorflowLocal: new ModelLoader(),
       progress: 20
     };
   },
@@ -55,8 +54,12 @@ export default {
 
           this.progress = 80;
 
-          //this.flowerClass = await this.predictLocalTensorflow(BGRImage);
-          //alert(this.flowerClass.label + ' ' + this.flowerClass.value);
+          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+          console.log(
+            'tensorflow local',
+            this.flowerClass.label,
+            this.flowerClass.value
+          );
 
           this.progress = 100;
 
@@ -103,14 +106,15 @@ export default {
      * @param {*} img image to predict on
      */
     predictLocalTensorflow: async function(img) {
-      await this.tensorflowLocal.load();
+      const tensorflow = new ModelLoader();
+      await tensorflow.load();
       const pixels = fromPixels(img);
 
-      let result = this.tensorflowLocal.predict(pixels);
+      let result = tensorflow.predict(pixels);
 
-      const topK = this.tensorflowLocal.getTopKClasses(result, 5);
+      const topK = tensorflow.getTopKClasses(result, 5);
 
-      this.tensorflowLocal.dispose();
+      tensorflow.dispose();
       return topK[0];
     },
 

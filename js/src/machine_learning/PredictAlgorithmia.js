@@ -31,24 +31,5 @@ export class PredictAlgorithmia {
         });
     });
 
-
-    /*return await new Promise(resolve => {
-      var xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://api.algorithmia.com/v1/web/algo/riccardogiorato/yourPocketbotanist/0.1.1/", true);
-      xhr.setRequestHeader("Authorization", "Simple" +  this.apiKey);
-      xhr.setRequestHeader("Content-type", "text/plain");
-      xhr.setRequestHeader("user", "riccardogiorato");
-    
-      xhr.onload = function(e) {
-        resolve(xhr.response);
-      };
-      xhr.onerror = function () {
-        resolve(undefined);
-        console.log("** An error occurred during the XMLHttpRequest");
-      };
-
-      xhr.send(image);
-    }) */
-
   } // predict
 }

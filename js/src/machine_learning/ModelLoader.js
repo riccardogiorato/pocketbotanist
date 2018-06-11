@@ -11,14 +11,6 @@ import {
   IMAGE_CLASSES
 } from "../classes";
 
-const CURRENT_ASSETS_DIR = "https://models.pocketbotanist.ml/";
-
-const MODEL_FILE_URL = "tensorflowjs_model.pb";
-const WEIGHT_MANIFEST_FILE_URL = "weights_manifest.json";
-const INPUT_NODE_NAME = "Placeholder";
-const OUTPUT_NODE_NAME = "loss";
-const PREPROCESS_DIVISOR = scalar(255 / 2);
-
 /**
  * This class loads your custom frozen tensorflow model
  * just pass the model remote location and names for input and output nodes
@@ -26,14 +18,25 @@ const PREPROCESS_DIVISOR = scalar(255 / 2);
  * @class ModelLoader
  */
 export class ModelLoader {
+  /**
+   * construct a tensorflow.js frozen model
+   */
+  constructor() {
+    this.CURRENT_ASSETS_DIR = "https://models.pocketbotanist.ml/";
+    this.MODEL_FILE_URL = "tensorflowjs_model.pb";
+    this.WEIGHT_MANIFEST_FILE_URL = "weights_manifest.json";
+    this.INPUT_NODE_NAME = "Placeholder";
+    this.OUTPUT_NODE_NAME = "loss";
+    this.PREPROCESS_DIVISOR = scalar(255 / 2);
+  } // constructor
 
   /**
    * load the remote tensorflow model and weight
    */
   async load() {
     this.model = await loadFrozenModel(
-      CURRENT_ASSETS_DIR + MODEL_FILE_URL,
-      CURRENT_ASSETS_DIR + WEIGHT_MANIFEST_FILE_URL
+      this.CURRENT_ASSETS_DIR + this.MODEL_FILE_URL,
+      this.CURRENT_ASSETS_DIR + this.WEIGHT_MANIFEST_FILE_URL
     );
   }
 
@@ -52,13 +55,13 @@ export class ModelLoader {
    */
   predict(input) {
     const preprocessedInput = div(
-      sub(input.asType('float32'), PREPROCESS_DIVISOR),
-      PREPROCESS_DIVISOR);
+      sub(input.asType('float32'), this.PREPROCESS_DIVISOR),
+      this.PREPROCESS_DIVISOR);
     const reshapedInput =
       preprocessedInput.reshape([1, ...preprocessedInput.shape]);
     return this.model.execute({
-      [INPUT_NODE_NAME]: reshapedInput
-    }, OUTPUT_NODE_NAME);
+      [this.INPUT_NODE_NAME]: reshapedInput
+    }, this.OUTPUT_NODE_NAME);
   }
 
   /**
