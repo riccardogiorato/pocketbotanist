@@ -1,0 +1,5 @@
+algorithmia>=1.0.0,<2.0
+tensorflow
+six
+numpy
+pillow

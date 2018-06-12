@@ -8,7 +8,6 @@ js/report.html
 # Pyhton notebooks ipynb_checkpoints
 python/.ipynb_checkpoints
 python/log/
-python/exportedModel
 
 # Training_mobilenet
 transfer_learning/data/*
