@@ -1,23 +1,5 @@
 # Tensorflow and other experiments!
 
-## Table of Contents
-
-**Big experiments**
-
-- getting a Tensorflow Frozen model
-- testing out a Tensorflow Frozen model locally
-- Tensorflow as a serverless function in the cloud (Algorithmia)
-- turning images to black and white to remove bias?
-
-[**Testing Models**](#testing-models)
-
-- [Datasets](#datasets)
-- [Clarifai](#clarifai)
-- [Tensorflow](#tensorflow)
-    - custom-vision model
-    - Tensorflow Inception V3
-    - Tensorflow Mobilenet-V2
-
 ## Testing Models
 
 ### Datasets
@@ -55,4 +37,4 @@ To visualized the images not founded look at  [the notebook](./testing-clarifai.
 | Mobilenet-V2      | 64%   | 96%   | 8 MB    | 0.899s           |
 | Inception V3      | 66%   | 96%   | 80 MB   | 4.996s           |
 
-![top-1](./img/top-1.png)
+![top-1](../docs/img/top-1.png)
