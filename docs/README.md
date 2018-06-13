@@ -2,36 +2,28 @@
 
 ## Table of Contents
 
-**Project introduction**
-
-- [Objective](#objective)
-- [Datasets](#datasets)
-- [Why Instagram?](#why-instagram?)
-- [Is this a Flower?](#is-this-a-flower?)
-- [Change of plan](#change-of-plan)
-
-**Big experiments**
-
-- [Getting a Tensorflow model](#getting-a-tensorflow-model)
-- [Testing Tensorflow locally](#testing-tensorflow-locally)
-- [Serverless AI](#serverless-ai)
-- [Machine Learning JavaScript](#machine-learning-javaScript)
-- [Black and White](#black-and-white)
-
-**Testing Results**
-
-- [Clarifai](#clarifai)
-- [Tensorflow](#tensorflow)
-
-**User Application**
-
-- [VUE.JS](#vue.js)
-- [Future progress](#future-progress)
-
-**Learning and thoughts**
-
-- [Abstraction](#abstraction)
-- [Real intelligence](#real-intelligence)
+- **Project introduction**
+  - [Objective](#objective)
+  - [Datasets](#datasets)
+  - [Why Instagram](#why-instagram)
+  - [Cognitive Services API problem](#cognitive-services-api-problem)
+  - [Is this a Flower](#is-this-a-flower)
+  - [Change of plan](#change-of-plan)
+- **Big experiments**
+  - [Getting a Tensorflow model](#getting-a-tensorflow-model)
+  - [Testing Tensorflow locally](#testing-tensorflow-locally)
+  - [Serverless AI](#serverless-ai)
+  - [Machine Learning JavaScript](#machine-learning-javaScript)
+  - [Black and White](#black-and-white)
+- **Testing Results**
+  - [Clarifai](#clarifai)
+  - [Tensorflow](#tensorflow)
+- **User Application**
+  - [VUE.JS](#vue.js)
+  - [Future progress](#future-progress)
+- **Learning and thoughts**
+  - [Abstraction](#abstraction)
+  - [Real intelligence](#real-intelligence)
 
 ## Project introduction
 
@@ -50,33 +42,33 @@ Then after that I continued using this application to download images for the te
 
 **Classes:**
 
-1.  daisy
-2.  dandelion
-3.  iris
-4.  rose
-5.  sunflower
-6.  tulip
-7.  waterlily
+1. daisy
+2. dandelion
+3. iris
+4. rose
+5. sunflower
+6. tulip
+7. waterlily
 
 **Training Dataset:** 700 images each class
 
 **Testing Dataset:** 50 images each class
 
-### Why Instagram?
+### Why Instagram
 
 Instagram images were downloaded by looking at hashtag with name of the flower. This brought up many images that didn't have the flower in it cause people using the platform don't have to respect any control on hashtags.
 
 I preferred using Instagram, not fetching simple google images or similiar things because I thought that Instagram photos are more aligned to what the end users are going to caputure with their phones using "Pocket Botanist" app. This experiment and its results will be discussed in the final part of this document.
 
-### Clarifai
+### Cognitive Services API problem
 
-Before the start of "Cognitive Services" course I found out [Clarifai](https://www.clarifai.com/) a small company providing "The most personalized computer vision solution on the planet", in short terms a suite of API and web interface to build custom visual models.
+Before the start of "Cognitive Services" course I found out [Clarifai](https://www.clarifai.com/) a small company providing "The most personalized computer vision solution on the planet", in short terms a suite of API and web interface to build custom ML visual models.
 
 At the beginning of this project I started testing them but I stopped developing a custom model because one problem aroused.
 
-They won't provide any simple way to export your model, they profit by keeping you hooked to their services as almost every other big ML provider does such as Google or Amazon.
+They won't provide any simple way to export your model, they profit by keeping you hooked to their services as almost every other big ML provider does such as Google, Amazon or IBM.
 
-### Is this a flower?
+### Is this a flower
 
 I decided to use Clarifai services anyway for a single feature for the application I was going to build.
 
@@ -107,7 +99,7 @@ Both of those two sources outputted two files:
 - the Tensorflow Frozen Model as model.pb file, composed by the weights from the training and the neural network layout
 - lables.txt file with the ordered list of classes name each one outputted from the model as a number associated to the class row in the txt file.
 
-In the following sections I'll evalute each different method of training
+In the following sections I'll evalute each different method of training.
 
 #### Custom Vision
 
@@ -131,7 +123,7 @@ I choose this service other than others such as Google Cloud services because wi
 I trained two different models using a script from the Tensorflow Team:
 
 - Inception V3, one of the most famous model built in the last few years
-- Mobilenet V2, one of the new models type, focused on quick computations to run on mobile devices with a small footprint of the model (10 mb against 100mb or more, such as Inception 80mb, 8 times more )
+- Mobilenet V2, one of the new models type, focused on quick computations to run on mobile devices with a small footprint of the model (10 MB against 100 MB or more, such as Inception 80 MB, 8 times more )
 
 The setting for the training were:
 
@@ -158,9 +150,17 @@ Those were the results I got:
     Step 3999: Cross entropy = 0.192044
     Step 3999: Validation accuracy = 80.0% (N=100)
 
+Model layout shared the input and output parts as it can be seen here.
+![models layout](./img/models_layout.jpg)
+
 ### Testing Tensorflow locally
 
 Having Tensorflow Frozen Models, I wanted to testout if the models were working locally on my machine.
+Having used two sources for the models I merged the different steps to evalute the images from:
+- [Microsoft Azure running TensorFlow model from custom-vision in Python](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/export-model-python)
+- [official Tensorflow image label script after transfer learning](https://github.com/tensorflow/tensorflow/raw/master/tensorflow/examples/label_image/label_image.py)
+
+I then used the resulting code from the merge of both script in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-tensorflow.ipynb), **WARNING** this notebook has a size of 85 MB, cause it contains all the results from the models with the mismatched images of flowers, used to get the results for the [Testing Results section](#testing-results).
 
 ### Serverless AI
 
@@ -210,11 +210,11 @@ To visualized the images not founded look at [the notebook](./testing-clarifai.i
 
 ### Tensorflow
 
-| Model name/source | Top-1 | Top-5 | Size MB | Avg exec 1 image |
-| ----------------- | ----- | ----- | ------- | ---------------- |
-| Custom-Vision     | 52%   | 98%   | 3 MB    | 0.366s           |
-| Mobilenet-V2      | 64%   | 96%   | 8 MB    | 0.899s           |
-| Inception V3      | 66%   | 96%   | 80 MB   | 4.996s           |
+| Model name/source | Top-1 | Top-5 | Nodes | Size MB | Avg exec 1 image |
+| ----------------- | ----- | ----- | ----- | ------- | ---------------- |
+| Custom-Vision     | 52%   | 98%   | 152   | 3 MB    | 0.366s           |
+| Mobilenet-V2      | 64%   | 96%   | 496   | 8 MB    | 0.899s           |
+| Inception V3      | 66%   | 96%   | 687   | 80 MB   | 4.996s           |
 
 ![top-1](./img/top-1.png)
 
@@ -227,12 +227,56 @@ To visualized the images not founded look at [the notebook](./testing-clarifai.i
 
 ## User Application
 
-### VUE.JS
+### Vue.js
+
+I choose [Vue.js](https://vuejs.org/), one of the current most famous open-source JavaScript framework for building user interfaces after React or Angular.
+
+I developed the entire application as a Single Page Application([SPA](https://en.wikipedia.org/wiki/Single-page_application)), the app interacts with the user by dynamically changing the current page rather than loading entire new pages from a backend server. I also added various modules to help me out building it such as [vue-material](https://vuematerial.io/) to develop the UI and UX more easily.
+
+**Pre-processing image**
+One step really important in the evaluation of images by the TensorFlow model was the pre-processing of images, resizing them down to width and height equals to the network input size and even changing the order or color value array for custom-vision from RGB to BGR.
+I decided to remove the python code from the backend function to reduce the cloud execution time, doing those steps on device with the help of HTML5 Canvas, as it can seen in the functions [here](https://github.com/Giorat/pocketbotanist/blob/master/js/src/components/AnalyzePhoto.vue#L144) with the functions:
+
+- resizeImg256
+- cropcenter
+- RGBtoBGR
+- blurCanvas
 
 ### Future progress
+
+As I already said I disabled the possibility to use local TensorFlow in the browser until the imported model are going to be fixed in the tfjs-converter.
 
 ## Learning and thoughts
 
 ### Abstraction
 
+Using services such as custom-vision enabled a really high abstraction, even more than libraries such as Keras or Tensorflow Hub are usefuel but lack of the possibility to create quick experiments easily for everyone.
+
+I also discovered similiar services to custom-vision such as [Lobe](https://lobe.ai/) or [Automl](https://cloud.google.com/automl/), still closed to the open public but that are going to enable greater experiences lowering the requeired entry level knowledge to start working with Machine Learning models.
+
 ### Real intelligence
+
+Anoter point of reflexion is the real intelligence of those ML visual models.
+I don't want to say that they aren't really clever even if the greatest models nowdays are getting really high accuracy while doing really specific tasks.
+
+My thought is that even if humans might be less precise we tend to not do really drastic errors because we think about interesting related memories.
+
+> “The state of the art in artificial intelligence today is merely a souped-up version of what machines could already do a generation ago: find hidden regularities in a large set of data. All the impressive achievements of deep learning amount to just curve fitting,” 
+<cite>[Judea Pearl](http://bayes.cs.ucla.edu/jp_home.html)</cite>
+
+ From this article ["To Build Truly Intelligent Machines, Teach Them Cause and Effect"](https://www.quantamagazine.org/to-build-truly-intelligent-machines-teach-them-cause-and-effect-20180515/).
+
+
+I have been thinking about Judea phrase and I started pondering about if teaching "Cause" and "Effect" might be even the to solution to teach a machine to recognise flowers.
+
+I also want to reflect on the association of "Cause" and "Effect" with stories we create or tell everyday.
+
+Let me explain if a children points a dandelion and ask you what's its name, you'll probably tell the answer but you won't stop there.
+You might show them how a dandelion reacts when you blow some air on it. By doing that the children will be interested and curios, probably trying to imitate you as soon as possible looking at other plant trying to find another dandelion.
+
+To sum up we tend to give childrens examples but we also provide interesting stories with cause and effect.
+
+Many of those stories will disappear from our memory but some of them won't go away probably because there's the [proved link](https://en.wikipedia.org/wiki/Emotion_and_memory) beetween emotions and memory.
+
+A machine might be built to be curious as a children, trying to recognise different object also by recalling some "interesting" stories from its memories.
+
