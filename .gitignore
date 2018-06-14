@@ -12,6 +12,9 @@ python/log/
 # Training_mobilenet
 transfer_learning/data/*
 
+# DOCS
+docs/essay.html
+
 # Webstorm
 .idea/
 

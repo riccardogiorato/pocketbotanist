@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "export": "pandoc README.md -s -f gfm  -c style.css -o essay.html "
+  }
+}
