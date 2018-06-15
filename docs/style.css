@@ -2,6 +2,10 @@
     page-break-before: always;
 }
 
+img {
+    max-width: 500px !important;
+}
+
 body {
     font-family: Helvetica, arial, sans-serif;
     font-size: 14px;

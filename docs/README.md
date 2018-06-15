@@ -3,13 +3,22 @@
     <img src="../design/logo.jpg" width="200px"/>
 </p>
 
+<br/><br/><br/><br/><br/><br/>
+
 <h1 align="center"> Your Pocket botanist </h1>
 
-<p align="center">
+<h3 align="center">
     Riccardo Emanuele Giorato - 1122158<br/><br/>
-   <b>Cognitive Services - Project type 2</b><br/><br/>
+   Cognitive Services - Project type 2<br/><br/>
     Academic Year: 2017-2018
+</h3>
+
+<br/><br/><br/>
+
+<p align="center">
+"Botany is the science in which plants are known by their aliases."
 </p>
+
 
 <div class="pagebreak"> </div>
 
@@ -22,6 +31,7 @@
   - [Cognitive Services API problem](#cognitive-services-api-problem)
   - [Is this a Flower](#is-this-a-flower)
   - [Change of plan](#change-of-plan)
+
 - **Big experiments**
   - [Getting a TensorFlow model](#getting-a-tensorflow-model)
   - [Testing TensorFlow locally](#testing-tensorflow-locally)
@@ -36,13 +46,14 @@
   - [Machine Learning JavaScript](#machine-learning-javaScript)
   - [Black and White](#black-and-white)
 
-
 - **User Application**
   - [VUE.JS](#vue.js)
   - [Future progress](#future-progress)
+
 - **Learning and thoughts**
   - [Abstraction](#abstraction)
   - [Real intelligence](#real-intelligence)
+  - [Conclusion](#conclusion)
 
 <div class="pagebreak"> </div>
 
@@ -56,11 +67,9 @@ In addition to that I'll discuss services and solutions that will enable to run 
 
 ### Datasets
 
-As a training dataset for 5 classes, except for iris and waterlily, it has been used this dataset from [Kaggle](https://www.kaggle.com/alxmamaev/flowers-recognition/data).
+The training dataset was made of 5 classes from this dataset on [Kaggle](https://www.kaggle.com/alxmamaev/flowers-recognition/data) then 2 more, iris and waterlily that I downloaded from Instagram with [4k stogram](https://www.4kdownload.com/products/product-stogram) application.
 
-I downloaded the remaining two classes photos from Instagram with [4k stogram](https://www.4kdownload.com/products/product-stogram).
-
-Then after that I continued using this application to download images for the testing dataset.
+I continued using this application to download images for the testing dataset too always from Instagram.
 
 **Classes:**
 
@@ -72,48 +81,51 @@ Then after that I continued using this application to download images for the te
 6. tulip
 7. waterlily
 
-**Dataset size:** you can use easily get the datasets used in this project from Flodyhub:
+**Dataset size:** you can use easily get the two datasets used in this project from Flodyhub:
+
 - [Training image dataset](https://www.floydhub.com/riccardogiorato/datasets/pocketbotanist-training), 7 classes \* 700 images = 4900 total images
 - [testing image dataset](https://www.floydhub.com/riccardogiorato/datasets/pocketbotanist-test), 7 classes \* 50 images = 350 total images
 
 ### Why Instagram
 
-Instagram images were downloaded by looking at hashtag with name of the flower. This brought up many images that didn't have the flower in it cause people using the platform don't have to respect any control on hashtags.
+Instagram images were downloaded by looking at hashtag with name of the flower. This brought up many images that didn't have the flower in it cause people using the platform don't have to respect any rules on hashtags.
 
-I preferred using Instagram, not fetching simple google images or similar things because I thought that Instagram photos are more aligned to what the end users are going to capture with their phones using "Pocket Botanist" app. This experiment and its results will be discussed in the final part of this document.
+I preferred using Instagram, not fetching google images or similar ways because I thought that Instagram photos are more similar to what the end users are going to capture with their phones using "Pocket Botanist" app.
+
+This source of images is also proved by this [new Research](https://www.theverge.com/2018/5/2/17311808/facebook-instagram-ai-training-hashtag-images) by Facebook where it's using billions of Instagram images to train models that were 1 to 2 percent better than any other system on the ImageNet benchmark.
 
 ### Cognitive Services API problem
 
-Before the start of "Cognitive Services" course I found out [Clarifai](https://www.clarifai.com/) a small company providing "The most personalized computer vision solution on the planet", in short terms a suite of API and web interface to build custom ML visual models.
+Before the start of "Cognitive Services" course I found out [Clarifai](https://www.clarifai.com/) a small company providing quote:"The most personalized computer vision solution on the planet", in short terms a suite of API and web interfaces to build easily custom ML visual models.
 
-At the beginning of this project I started testing them but I stopped developing a custom model because one problem aroused.
+At the beginning of this project I started testing them but I stopped using them because one problem aroused.
 
-They won't provide any simple way to export your model, they profit by keeping you hooked to their services as almost every other big ML provider does such as Google, Amazon or IBM.
+They won't provide any simple way to export your model, they profit by keeping you hooked to their services as almost every other big general ML provider does such as Google, Amazon or IBM.
 
 ### Is this a flower
 
-I decided to use Clarifai services anyway for a single feature for the application I was going to build.
+I decided to use Clarifai services anyway for a single feature of the application I was going to build.
 
-I used their [General Model](https://www.clarifai.com/models/general-image-recognition-model-aaa03c23b3724a16a56b629203edc62c) to predict if in a user photo there was a "plant" or a "flower" to prevent "wrong" images from getting in the queue for the real classification model.
+I used their [General Model](https://www.clarifai.com/models/general-image-recognition-model-aaa03c23b3724a16a56b629203edc62c) to predict if there was a "plant" or a "flower" in a user photo to prevent "wrong" images from getting in the queue for the real classification model.
 
-This reduced the possibility of users submitting images of people, cars or any other thing except the area of this application.
+This reduced the possibility of users submitting images of people, cars or any other thing except the area of this application, making the app react faster when user took photos of anything other that than flowers.
 
 ### Change of plan
 
-I decided that I wanted to use a service that would give me the possibility to export a model of some kind of format, being able to use it in any way I wanted in the future.
+My goals was to use a service that would give me the possibility to export a model in some kind of format, being able to use it in any way I wanted in the future.
 
 Looking at various solutions in the current market of ML softwares and tools I choose to work with TensorFlow saved models.
 
-## Big experiments
+<div class="pagebreak"> </div>
 
-With all those images I then needed to conduct various experiments to get a "Machine Learning system" capable of returning the appropriated class for a flower.
+## Big experiments
 
 ### Getting a TensorFlow model
 
 I wanted to train and create different TensorFlow models.
 I choose two different sources:
 
-- microsoft cognitive services [customvision.ai](http://customvision.ai/)
+- Microsoft Cognitive Services [Custom Vision](http://customvision.ai/)
 - TensorFlow transfer learning through [retrain script](https://github.com/Giorat/pocketbotanist/blob/master/transfer_learning/retrain.py) from TensorFlow team executed on [flodyhub.com](https://flodyhub.com)
 
 Both of those two sources outputted two really important files:
@@ -131,27 +143,33 @@ This web software let's users train a model in less than 10 minutes getting pret
 Their output model need images to be translated from RGB color code to BGR(Blue-Green-Red) with a width X height of 227 pixels.
 
 **Training results**
-![training results](./img/colored_images.jpg)
 
+<img src="./img/colored_images1.jpg"  width="500"  />
 
-After studying the layout of the Frozen Model with TensorBoard I was able to understand that Microsoft used SqueezeNet as base model to execute the transfer learning.
+**Precision:** if a tag is predicted by your model, how likely is that to be right.
+
+**Recall:** out of the tags which should be predicted correctly, what percentage did your model correctly find.
+
+<img src="./img/colored_images2.jpg"  width="500"  />
+
+After studying the layout of the Frozen Model with TensorBoard, I was able to understand that Microsoft used SqueezeNet as base model to execute the transfer learning.
+
 I'm sure of this because there were a bunch of ["fire modules"](https://arxiv.org/abs/1602.07360v3) in it and the layout was the same as described in [this SqueezeNet article](https://medium.com/@smallfishbigsea/notes-of-squeezenet-4137d51feef4).
-
 Essentially SqueezeNet is a model with AlexNet-level accuracy with 50x fewer parameters and a model size of just a few MB.
 
 **Model layout**<br/>
-![customvision layout](https://lankas.github.io/15-618Project/images/SqueezeNet.PNG)
+![customvision layout](https://community.arm.com/cfs-file/__key/communityserver-discussions-components-files/18/pastedimage1485588767177v1.png)
 
 #### Flodyhub
 
-Floydhub isn't a service provider of API or web apps to train a machine learning visual model like customvision but it provides user with a fast and quick workbench in the cloud to train models using AWS CPU with up to 20 hours of free training time for new users.
+Floydhub isn't a service provider of API or web apps to train a machine learning visual model like Custom Vision but it provides user with a fast and quick workbench in the cloud to train models using AWS CPU with up to 20 hours of free training time for new users.
 
 I choose this service other than others such as Google Cloud services because with just one simple command I was able to start training a neural network with optimized TensorFlow kernel on my custom code and training dataset.
 
 I trained two different models using a script from the TensorFlow Team:
 
-- Inception V3, one of the most famous model built in the last few years
-- MobileNetV2, one of the new models type, focused on quick computations to run on mobile devices with a small footprint of the model (10 MB against 100 MB or more, such as Inception 80 MB, 8 times more )
+- [Inception V3](https://arxiv.org/abs/1512.00567), one of the most famous model built in the last few years
+- [MobileNetV2](https://arxiv.org/abs/1801.04381), one of the new models type, focused on quick computations to run on mobile devices with a small footprint of the model (10 MB against 100 MB or more, such as Inception 80 MB, 8 times more )
 
 The setting for the training were:
 
@@ -165,21 +183,23 @@ The setting for the training were:
 - evaluation step interval of 10 eval
 - testing batch size == entire dataset
 
-Those were the results I got:
+**Training results**
 
-- **Inception V3**
+- **Inception V3:**
   - [execution on floydhub](https://www.floydhub.com/riccardogiorato/projects/mobilenettraining/16)
     Step 3999: Train accuracy = 89.0%
     Step 3999: Cross entropy = 0.274404
     Step 3999: Validation accuracy = 82.0% (N=100)
-- **MobileNetV2**
+- **MobileNetV2:**
   - [execution on floydhub](https://www.floydhub.com/riccardogiorato/projects/mobilenettraining/17)
     Step 3999: Train accuracy = 97.0%
     Step 3999: Cross entropy = 0.192044
     Step 3999: Validation accuracy = 80.0% (N=100)
 
-Model layout shared the input and output parts as it can be seen here.
-![models layout](./img/models_layout.jpg)
+The model layout shares the input and output parts as it can be seen here from a TensorBoard screenshot fo the Frozen Models.
+<p align="center">
+  <img src="./img/models_layout.jpg"  width="500"  />
+</p>
 
 The only different was the block after hub_input and before hub_output.
 
@@ -189,15 +209,17 @@ The only different was the block after hub_input and before hub_output.
 **MobileNetV2**<br/>
 ![MobileNetV2 architecture](https://yinguobing.com/content/images/2018/03/mobilenet-v2-conv.jpg)
 
-
 ### Testing TensorFlow locally
 
 Having TensorFlow Frozen Models, I wanted to test out if the models were working locally on my machine.
 Having used two sources for the models I merged the different steps to evaluate the images from:
-- [Microsoft Azure running TensorFlow model from custom-vision in Python](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/export-model-python)
-- [official TensorFlow image label script after transfer learning](https://github.com/TensorFlow/TensorFlow/raw/master/TensorFlow/examples/label_image/label_image.py)
 
-I then used the resulting code from the merge of both script in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-TensorFlow.ipynb), **WARNING** this notebook has a size of 85 MB, cause it contains all the results from the models with the mismatched images of flowers, used to get the results for the next section.
+- [Microsoft Azure running TensorFlow model from custom-vision in Python](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/export-model-python), image converted to smaller resolution then changed colors from RGB to BGR;
+- [official TensorFlow image label script after transfer learning](https://github.com/TensorFlow/TensorFlow/raw/master/TensorFlow/examples/label_image/label_image.py), image resized to smaller resolution then converted using TensorFlow image functions.
+
+I then used the resulting code from the merge of both script in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-TensorFlow.ipynb).
+
+**!! WARNING !!** This notebook is of 85 MB because it contains all the results from the models with the mismatched images of the flowers, used to get the results for the next section.
 
 <div class="pagebreak"> </div>
 
@@ -212,11 +234,11 @@ Tested Clarifai general API to detect a flower on the testing dataset.
 | 318          | 318              | 0,984802079378047   |
 | 91%          | 91%              | 98%                 |
 
-To visualized the images not founded look at [the notebook](./testing-clarifai.ipynb) used for the testing.
+To visualized the images not founded look at [the notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-clarifai.ipynb) used for the testing.
 
 ### TensorFlow
 
-Tested TensorFlow models on the testing dataset, executed on laptop CPU intel i7, 8 GB ram.
+Tested TensorFlow models on the testing dataset, executed on laptop with intel i7 CPU and 8 GB of ram.
 
 | Model name/source | Top-1 | Top-5 | Nodes | Size MB | Avg exec 1 image |
 | ----------------- | ----- | ----- | ----- | ------- | ---------------- |
@@ -230,13 +252,13 @@ Tested TensorFlow models on the testing dataset, executed on laptop CPU intel i7
 
 **Stats and reports:**
 
-- Top-1 accuracy is the conventional accuracy: the model answer (the one with highest probability) must be exactly the expected answer.
-- Top-5 accuracy means that any of your model 5 highest probability answers must match the expected answer.
+- **Top-1** accuracy is the conventional accuracy: the model answer (the one with highest probability) must be exactly the expected answer.
+- **Top-5** accuracy means that any of your model 5 highest probability answers must match the expected answer.
 
 ### The Chosen One
 
 Before building the frontend app I had to choose which model to use in the Algorithmia function and with TensorFlow in Javascript.
-Even if Inception V3 model was the most correct model in most of the cases I had to throw it away because it was too slow to get just a single prediction. With MobileNetV2 and Customvision remaining I choose Customvision because it was 3 times more fast than MobileNetV2.   
+Even if Inception V3 model was the most correct model in most of the cases I had to throw it away because it was too slow to get just a single prediction. With MobileNetV2 and Custom Vision remaining I choose Custom Vision because it was 3 times faster than MobileNetV2.
 
 <div class="pagebreak"> </div>
 
@@ -244,18 +266,19 @@ Even if Inception V3 model was the most correct model in most of the cases I had
 
 ### Serverless AI
 
-I wanted to use TensorFlow as a serverless function in the cloud.
-After some searches I found out many possible alternatives such as Google Cloud Functions, AWS lambda or Algorithmia functions.
-I choose the last one cause they were the most focused on machine learning functions, with the simplest way to configure and run them.
-Plus the give 5.000 credits each month for free where the other cloud providers only gave limited time trial credits.
+I wanted to use TensorFlow as a  [serverless function](https://medium.com/@BoweiHan/an-introduction-to-serverless-and-faas-functions-as-a-service-fb5cec0417b2) in the cloud.
 
-The function code is [here](./algorithmia) and the function online can be seen [here](https://algorithmia.com/algorithms/riccardogiorato/yourPocketbotanist).
+I found out many possible alternatives such as Google Cloud Functions, AWS lambda or Algorithmia functions.
+I choose the last one because they were the most focused on machine learning functions, with the simplest way to configure and run them.
+Other than that, they give 5.000 free credits each month whereas the other cloud providers only gave limited time trial credits.
+
+The function code is [here](https://github.com/Giorat/pocketbotanist/blob/master/python/algorithmia) and the function online can be seen [here](https://algorithmia.com/algorithms/riccardogiorato/yourPocketbotanist).
 
 ### Machine Learning JavaScript
 
-Around February 2018 Google announced that a small project called deeplearn.js had been converted to TensorFlow.js the official supported version of TensorFlow as a library for training and deploying ML models in the browser and on Node.js.
+Around February 2018 Google announced that a small project called deeplearn.js had been converted to [TensorFlow.js](https://js.tensorflow.org/) the official supported version of TensorFlow as a library for training and deploying ML models in the browser and on Node.js with Javascript.
 
-One of it's proposed features it's the conversion of TensorFlow python model to run in the browser.
+One of its proposed features is the conversion of TensorFlow python model to run in the browser.
 Up to now, June 2018, conversion it's not fully supported because many operations and methods still need to be translated/converted to Javascript.
 
 Due to the fact that I wanted to be able to run the model without using the power of cloud, enabling the full user privacy of image analysis I managed to export the model with [tfjs-converter](https://github.com/TensorFlow/tfjs-converter) and then built a [Model Loader](https://github.com/Giorat/pocketbotanist/blob/master/js/src/machine_learning/ModelLoader.js).
@@ -264,15 +287,17 @@ In the final application I disabled this feature because I got wrong predictions
 
 ### Black and White
 
-'turning images to black and white to remove bias?'
-I have tested if removing colors from images might lead to a better model or worst.
-I trained it using again custom-vision and this where the results I got.
+>"turning images to black and white to remove bias?"
 
-![black and white results](./img/black_and_white.jpg)
+I have tested if removing colors from images might lead to a better or worst model.
+I trained it using again Custom Vision and this where the results I got.
+
+<img src="./img/black_and_white.jpg"  width="500"  />
 
 They were 5/6% less accurate both in precision and in recall than the colored version model.
 
 My conclusion is that even if colors might introduce some bias they are really helpful to recognize flowers even if the dataset need to provide different types.
+
 For example, the training dataset provided different kind of rose colors even if it's common to see roses only as red, this enabled the model to recognize different kind of roses without being fooled by saying that anything red like a rose might be more probable to be a rose.
 
 <div class="pagebreak"> </div>
@@ -334,7 +359,6 @@ My thought is that even if humans might be less precise we tend to not do really
 
  From this article ["To Build Truly Intelligent Machines, Teach Them Cause and Effect"](https://www.quantamagazine.org/to-build-truly-intelligent-machines-teach-them-cause-and-effect-20180515/).
 
-
 I have been thinking about Judea phrase and I started pondering about if teaching "Cause" and "Effect" might be even the to solution to teach a machine to recognize flowers.
 
 I also want to reflect on the association of "Cause" and "Effect" with stories we create or tell everyday.
@@ -347,3 +371,18 @@ To sum up we tend to give children examples but we also provide interesting stor
 Many of those stories will disappear from our memory but some of them won't go away probably because there's the [proved link](https://en.wikipedia.org/wiki/Emotion_and_memory) between emotions and memory.
 
 A machine might be built to be curious as a children, trying to recognize different object also by recalling some "interesting" stories from its memories.
+
+### Conclusion
+
+In summary, I was able to train a visual ML model using two different ways, choosing the Microsoft Custom Vision as the final one, running the exported TensorFlow model on a serverless services known as Algorithmia then I created a modern web application enabling users to get flower names just by taking a photo with their cameras.
+
+The final TensorFlow model had a Top-1 precision of 52% and Top-5 precision of 98%, due to the fact that the testing dataset was too small to prove the full capability of it.
+
+![tesla over research](https://petewarden.files.wordpress.com/2018/05/sleep_lost1.jpg?w=768)
+
+> "Why you need to improve your training/test dataset"
+> <cite> by [Pete Warden](https://twitter.com/petewarden) from this [article](https://petewarden.com/2018/05/28/why-you-need-to-improve-your-training-data-and-how-to-do-it/) </cite>
+
+If I had one more week I would have increased the testing dataset size 5 times more, in fact I tested out a smaller version of Tulip dataset with 100 new images always from Instagram getting Top-1 of 48% and a Top-5 of 93%, whereas the previous test got only Topi-1 of 30% and Top-5 of 90%.
+
+This final test was completed in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-more-tulip.ipynb).
