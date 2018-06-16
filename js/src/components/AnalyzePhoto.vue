@@ -1,8 +1,6 @@
 <template>
     <div>
-        
         <md-progress-spinner :md-diameter="150" :md-stroke="10" :md-value="progress" class="spinner"></md-progress-spinner>
-
     </div>
 </template>
 <script>

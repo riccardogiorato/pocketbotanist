@@ -10,7 +10,7 @@
     "url": "https://riccardogiorato.com"
   },
   "scripts": {
-    "start": "parcel src/index.html --no-hmr --open --hmr-hostname 192.168.1.66 --https",
+    "start": "parcel src/index.html --no-hmr --open --hmr-hostname 192.168.1.66 --https  --no-cache",
     "build": "parcel build src/index.html -d public --public-url ./",
     "clean": "RMDIR  dist /S /Q && RMDIR  public /S /Q && RMDIR  .cache /S /Q"
   },
