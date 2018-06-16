@@ -26,7 +26,7 @@
 
 - **Project introduction**
   - [Objective](#objective)
-  - [Datasets](#datasets)
+  - [Dataset](#dataset)
   - [Why Instagram](#why-instagram)
   - [Cognitive Services API problem](#cognitive-services-api-problem)
   - [Is this a Flower](#is-this-a-flower)
@@ -65,9 +65,13 @@ The goal of this project is to build a ML visual model to recognize seven types 
 
 In addition to that I'll discuss services and solutions that will enable to run this application in the future after the end of the project for free, it wouldn't be the same for services such as AWS that only give one year of free credits.
 
-### Datasets
+The entire project was developed posting all the progress, files and documents in this Github repository: [Giorat/pocketbotanist](https://github.com/Giorat/pocketbotanist).
 
-The training dataset was made of 5 classes from this dataset on [Kaggle](https://www.kaggle.com/alxmamaev/flowers-recognition/data) then 2 more, iris and waterlily that I downloaded from Instagram with [4k stogram](https://www.4kdownload.com/products/product-stogram) application.
+The final web application can be found here: [pocketbotanist.ml](https://pocketbotanist.ml/).
+
+### Dataset
+
+The training dataset was made of 5 classes from this dataset on [Kaggle](https://www.kaggle.com/alxmamaev/flowers-recognition/data) plus 2 more, iris and waterlily that I downloaded from Instagram with [4k stogram](https://www.4kdownload.com/products/product-stogram) application.
 
 I continued using this application to download images for the testing dataset too always from Instagram.
 
@@ -81,7 +85,7 @@ I continued using this application to download images for the testing dataset to
 6. tulip
 7. waterlily
 
-**Dataset size:** you can use easily get the two datasets used in this project from Flodyhub:
+**Dataset size:** you can use easily get the two dataset used in this project from Floydhub:
 
 - [Training image dataset](https://www.floydhub.com/riccardogiorato/datasets/pocketbotanist-training), 7 classes \* 700 images = 4900 total images
 - [testing image dataset](https://www.floydhub.com/riccardogiorato/datasets/pocketbotanist-test), 7 classes \* 50 images = 350 total images
@@ -114,7 +118,7 @@ This reduced the possibility of users submitting images of people, cars or any o
 
 My goals was to use a service that would give me the possibility to export a model in some kind of format, being able to use it in any way I wanted in the future.
 
-Looking at various solutions in the current market of ML softwares and tools I choose to work with TensorFlow saved models.
+I started looking at various solutions in the current market of ML softwares and tools, after some study I choose to work with TensorFlow saved models.
 
 <div class="pagebreak"> </div>
 
@@ -130,8 +134,8 @@ I choose two different sources:
 
 Both of those two sources outputted two really important files:
 
-- the TensorFlow Frozen Model as model.pb file, composed by the weights from the training and the neural network layout
-- labels.txt file with the ordered list of classes name each one outputted from the model as a number associated to the class row in the txt file.
+- the TensorFlow Frozen Model as **model.pb** file, composed by the weights from the training and the neural network layout
+- **labels.txt** file with the ordered list of classes name each one outputted from the model as a number associated to the class row in the txt file.
 
 In the following sections I'll evaluate each different method of training.
 
@@ -154,13 +158,13 @@ Their output model need images to be translated from RGB color code to BGR(Blue-
 
 After studying the layout of the Frozen Model with TensorBoard, I was able to understand that Microsoft used SqueezeNet as base model to execute the transfer learning.
 
-I'm sure of this because there were a bunch of ["fire modules"](https://arxiv.org/abs/1602.07360v3) in it and the layout was the same as described in [this SqueezeNet article](https://medium.com/@smallfishbigsea/notes-of-squeezenet-4137d51feef4).
+I'm sure of this because there were a bunch of ["fire modules"](https://arxiv.org/abs/1602.07360v3) in it and the layout was the same as described in [this  article about SqueezeNet](https://medium.com/@smallfishbigsea/notes-of-squeezenet-4137d51feef4).
 Essentially SqueezeNet is a model with AlexNet-level accuracy with 50x fewer parameters and a model size of just a few MB.
 
 **Model layout**<br/>
 ![customvision layout](https://community.arm.com/cfs-file/__key/communityserver-discussions-components-files/18/pastedimage1485588767177v1.png)
 
-#### Flodyhub
+#### Floydhub
 
 Floydhub isn't a service provider of API or web apps to train a machine learning visual model like Custom Vision but it provides user with a fast and quick workbench in the cloud to train models using AWS CPU with up to 20 hours of free training time for new users.
 
@@ -186,12 +190,12 @@ The setting for the training were:
 **Training results**
 
 - **Inception V3:**
-  - [execution on floydhub](https://www.floydhub.com/riccardogiorato/projects/mobilenettraining/16)
+  - [execution on Floydhub](https://www.floydhub.com/riccardogiorato/projects/mobilenettraining/16)
     Step 3999: Train accuracy = 89.0%
     Step 3999: Cross entropy = 0.274404
     Step 3999: Validation accuracy = 82.0% (N=100)
 - **MobileNetV2:**
-  - [execution on floydhub](https://www.floydhub.com/riccardogiorato/projects/mobilenettraining/17)
+  - [execution on Floydhub](https://www.floydhub.com/riccardogiorato/projects/mobilenettraining/17)
     Step 3999: Train accuracy = 97.0%
     Step 3999: Cross entropy = 0.192044
     Step 3999: Validation accuracy = 80.0% (N=100)
@@ -203,10 +207,10 @@ The model layout shares the input and output parts as it can be seen here from a
 
 The only different was the block after hub_input and before hub_output.
 
-**Inception V3**<br/>
+**Inception V3 Model layout**<br/>
 ![Inception V3 architecture](https://cdn-images-1.medium.com/max/1890/1*uXfC5fcbDsL0TJG4T8PsVw.png)
 
-**MobileNetV2**<br/>
+**MobileNetV2 Model layout**<br/>
 ![MobileNetV2 architecture](https://yinguobing.com/content/images/2018/03/mobilenet-v2-conv.jpg)
 
 ### Testing TensorFlow locally
@@ -214,8 +218,8 @@ The only different was the block after hub_input and before hub_output.
 Having TensorFlow Frozen Models, I wanted to test out if the models were working locally on my machine.
 Having used two sources for the models I merged the different steps to evaluate the images from:
 
-- [Microsoft Azure running TensorFlow model from custom-vision in Python](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/export-model-python), image converted to smaller resolution then changed colors from RGB to BGR;
-- [official TensorFlow image label script after transfer learning](https://github.com/TensorFlow/TensorFlow/raw/master/TensorFlow/examples/label_image/label_image.py), image resized to smaller resolution then converted using TensorFlow image functions.
+- [Microsoft Azure running TensorFlow model from custom-vision in Python](https://docs.microsoft.com/en-us/azure/cognitive-services/custom-vision-service/export-model-python), image converted to smaller resolution then changed colors from RGB to BGR using numpy libraries;
+- [official TensorFlow image label script after transfer learning](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/label_image/label_image.py), image resized to smaller resolution then converted using TensorFlow image functions.
 
 I then used the resulting code from the merge of both script in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-TensorFlow.ipynb).
 
