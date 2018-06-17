@@ -235,18 +235,18 @@ I then used the resulting code from the merge of both script in [this jupyter no
 
 ### Clarifai
 
-Tested Clarifai general API to detect a flower on the testing dataset.
+I tested [Clarifai General model API](https://clarifai.com/models/general-image-recognition-model-aaa03c23b3724a16a56b629203edc62c) to detect if there was a flower in every photo of the testing dataset of 350 photos.
 
 | Flower found | Probability > 50 | Average Probability |
 | ------------ | ---------------- | ------------------- |
 | 318          | 318              | 0,984802079378047   |
 | 91%          | 91%              | 98%                 |
 
-To visualized the images not founded look at [the notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-clarifai.ipynb) used for the testing.
+To visualized the images not founded look at [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-clarifai.ipynb).
 
 ### TensorFlow
 
-Tested TensorFlow models on the testing dataset, executed on laptop with intel i7 CPU and 8 GB of ram.
+I tested TensorFlow models always on the testing dataset, executed on laptop with intel i7 CPU and 8 GB of ram.
 
 | Model name/source | Top-1 | Top-5 | Nodes | Size MB | Avg exec 1 image |
 | ----------------- | ----- | ----- | ----- | ------- | ---------------- |
@@ -382,7 +382,7 @@ A machine might be built to be curious as a children, trying to recognize differ
 
 ### Conclusion
 
-In summary, I was able to train a visual ML model using two different ways, choosing the Microsoft Custom Vision as the final one, running the exported TensorFlow model on a serverless services known as Algorithmia then I created a modern web application enabling users to get flower names just by taking a photo with their cameras.
+In summary, I was able to train a visual ML model using two different ways, choosing the Microsoft Custom Vision as the final one, running the exported TensorFlow model on a serverless services known as Algorithmia then I created a modern web application enabling users to get flower names just by taking a photo with their smartphones.
 
 The final TensorFlow model had a Top-1 precision of 52% and Top-5 precision of 98%, due to the fact that the testing dataset was too small to prove the full capability of it.
 
@@ -394,3 +394,4 @@ The final TensorFlow model had a Top-1 precision of 52% and Top-5 precision of 9
 If I had one more week I would have increased the testing dataset size 5 times more, in fact I tested out a smaller version of Tulip dataset with 100 new images always from Instagram getting Top-1 of 48% and a Top-5 of 93%, whereas the previous test got only Topi-1 of 30% and Top-5 of 90%.
 
 This final test was completed in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-more-tulip.ipynb).
+

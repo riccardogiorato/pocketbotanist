@@ -1,0 +1,47 @@
+@startuml
+
+title "your Pocket botanist - all things I have done for this project"
+
+(*) --> "Found dataset of flowers"
+
+--> "Downloaded more images from Instagram"
+
+--> "Cleaned and splitted dataset"
+
+--> "Clarifai Custom Model"
+
+--> "Clarifai General Model"
+
+--> ===B1===
+--> "Custom-Vision Microsoft training"
+--> "Create python functions to use its exported model BGR"
+--> ===B2===
+
+===B1=== --> "Floydhub Tensorflow transfer learning"
+--> "Inception v3 Model training"
+--> "MobilenetV2 Model training"
+--> "Create python functions to use those exported models"
+--> ===B2===
+
+--> "Merged in one single function both models"
+--> "Clarifai General Model testing"
+--> "Tensorflow testing"
+--> "Algorithmia Serverless ML function"
+
+
+--> ===C1===
+--> "Tested Black and White images on Custom-Vision"
+--> "Tensorflow Javascript model conversion and execution"
+--> ===C2===
+
+===C1=== --> "Developed Sketch UI for web app"
+--> "Coded webcam/camera classes"
+--> "Coded Machine Learning classes"
+--> "Create pages and animations"
+--> ===C2===
+
+--> "Written README.md for Github repository"
+
+--> "Written Essay"
+
+@enduml

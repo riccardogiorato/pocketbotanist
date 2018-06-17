@@ -47,6 +47,10 @@ You can use easily the datasets used in this project from flodyhub:
 - [training image dataset](https://www.floydhub.com/riccardogiorato/datasets/pocketbotanist-training), 7 classes \* 700 images = 4900 total images
 - [testing image dataset](https://www.floydhub.com/riccardogiorato/datasets/pocketbotanist-test), 7 classes \* 50 images = 350 total images
 
+## What have I done in this project?
+
+![](http://www.plantuml.com/plantuml/proxy?idx=0&src=https://raw.github.com/giorat/pocketbotanist/master/docs/project.puml)
+
 #### Frontend Hosting
 
 **Thanks to Netlify**
