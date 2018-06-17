@@ -94,9 +94,9 @@ I continued using this application to download images for the testing dataset to
 
 Instagram images were downloaded by looking at hashtag with name of the flower. This brought up many images that didn't have the flower in it cause people using the platform don't have to respect any rules on hashtags.
 
-I preferred using Instagram, not fetching google images or similar ways because I thought that Instagram photos are more similar to what the end users are going to capture with their phones using "Pocket Botanist" app.
+I preferred using Instagram, not fetchingc images from google or similar sources because I thought that Instagram photos are more similar to what the end users are going to capture with their phones using "Pocket Botanist" app.
 
-This source of images is also proved by this [new Research](https://www.theverge.com/2018/5/2/17311808/facebook-instagram-ai-training-hashtag-images) by Facebook where it's using billions of Instagram images to train models that were 1 to 2 percent better than any other system on the ImageNet benchmark.
+This is a good source of images proved for example by this [new Research](https://www.theverge.com/2018/5/2/17311808/facebook-instagram-ai-training-hashtag-images) by Facebook where it's using billions of Instagram images to train models that were 1 to 2 percent better than any other system on the ImageNet benchmark.
 
 ### Cognitive Services API problem
 
@@ -137,9 +137,10 @@ Both of those two sources outputted two really important files:
 - the TensorFlow Frozen Model as **model.pb** file, composed by the weights from the training and the neural network layout
 - **labels.txt** file with the ordered list of classes name each one outputted from the model as a number associated to the class row in the txt file.
 
-In the following sections I'll evaluate each different method of training.
+In the following two sections I'll evaluate each different method of training.
 
-#### Custom Vision
+**Custom Vision**
+------------------
 
 I discovered this service while looking at possible API or services that enabled fast TensorFlow model training, with an export function.
 This web software let's users train a model in less than 10 minutes getting pretty accurate predictions on different kind of areas/subjects.
@@ -164,18 +165,20 @@ Essentially SqueezeNet is a model with AlexNet-level accuracy with 50x fewer par
 **Model layout**<br/>
 ![customvision layout](https://community.arm.com/cfs-file/__key/communityserver-discussions-components-files/18/pastedimage1485588767177v1.png)
 
-#### Floydhub
+**Floydhub**
+-------------
 
-Floydhub isn't a service provider of API or web apps to train a machine learning visual model like Custom Vision but it provides user with a fast and quick workbench in the cloud to train models using AWS CPU with up to 20 hours of free training time for new users.
+Floydhub isn't a service provider of API or web apps to train a machine learning visual model like Custom Vision.
+It provides user with a fast and quick workbench in the cloud to train models using AWS CPU with up to 20 hours of free training time for new users.
 
-I choose this service other than others such as Google Cloud services because with just one simple command I was able to start training a neural network with optimized TensorFlow kernel on my custom code and training dataset.
+I choose this service and not others such as Google Cloud services because with just one simple command I was able to start training a neural network with optimized TensorFlow kernel on my custom code and training dataset.
 
 I trained two different models using a script from the TensorFlow Team:
 
 - [Inception V3](https://arxiv.org/abs/1512.00567), one of the most famous model built in the last few years
 - [MobileNetV2](https://arxiv.org/abs/1801.04381), one of the new models type, focused on quick computations to run on mobile devices with a small footprint of the model (10 MB against 100 MB or more, such as Inception 80 MB, 8 times more )
 
-The setting for the training were:
+The setting for the transfer-learning training were:
 
 - 4,000 training steps
 - 80% of the images into the main training set
@@ -188,6 +191,7 @@ The setting for the training were:
 - testing batch size == entire dataset
 
 **Training results**
+--------------------
 
 - **Inception V3:**
   - [execution on Floydhub](https://www.floydhub.com/riccardogiorato/projects/mobilenettraining/16)
@@ -223,7 +227,7 @@ Having used two sources for the models I merged the different steps to evaluate 
 
 I then used the resulting code from the merge of both script in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-TensorFlow.ipynb).
 
-**!! WARNING !!** This notebook is of 85 MB because it contains all the results from the models with the mismatched images of the flowers, used to get the results for the next section.
+**!! WARNING !!** This notebook has a size of 85 MB because it contains all the results from the models with the mismatched images of the flowers, used to get the results for the next section.
 
 <div class="pagebreak"> </div>
 
