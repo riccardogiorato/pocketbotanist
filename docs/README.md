@@ -61,9 +61,10 @@
 
 ### Objective
 
-The goal of this project is to build a ML visual model to recognize seven types of flowers in real time with a related web application.
+The goal of this project was to build a ML visual model to recognize seven types of flowers in real time with a related web application.
 
-In addition to that I'll discuss services and solutions that will enable to run this application in the future after the end of the project for free, it wouldn't be the same for services such as AWS that only give one year of free credits.
+In addition to that I have discussed services and solutions that will enable to run this application in the future after the end of the project for free.
+It wouldn't be the same for services such as AWS that only give one year of free credits.
 
 The entire project was developed posting all the progress, files and documents in this Github repository: [Giorat/pocketbotanist](https://github.com/Giorat/pocketbotanist).
 
@@ -94,25 +95,25 @@ I continued using this application to download images for the testing dataset to
 
 Instagram images were downloaded by looking at hashtag with name of the flower. This brought up many images that didn't have the flower in it cause people using the platform don't have to respect any rules on hashtags.
 
-I preferred using Instagram, not fetchingc images from google or similar sources because I thought that Instagram photos are more similar to what the end users are going to capture with their phones using "Pocket Botanist" app.
+I preferred using Instagram, not fetching images from google or similar sources because I thought that Instagram photos are more similar to what the end users are going to capture with their phones using "Pocket Botanist" app.
 
 This is a good source of images proved for example by this [new Research](https://www.theverge.com/2018/5/2/17311808/facebook-instagram-ai-training-hashtag-images) by Facebook where it's using billions of Instagram images to train models that were 1 to 2 percent better than any other system on the ImageNet benchmark.
 
 ### Cognitive Services API problem
 
-Before the start of "Cognitive Services" course I found out [Clarifai](https://www.clarifai.com/) a small company providing quote:"The most personalized computer vision solution on the planet", in short terms a suite of API and web interfaces to build easily custom ML visual models.
+Before the start of "Cognitive Services" course I found out [Clarifai](https://www.clarifai.com/) a small company providing quote: *"The most personalized computer vision solution on the planet"*, in short terms a suite of API and web interfaces to build easily custom ML visual models.
 
-At the beginning of this project I started testing them but I stopped using them because one problem aroused.
+At the beginning of this project I started testing it but I stopped using it because one problem aroused.
 
-They won't provide any simple way to export your model, they profit by keeping you hooked to their services as almost every other big general ML provider does such as Google, Amazon or IBM.
+Clarifai won't provide any way to export your model, they profit by keeping you hooked to their services as almost every other big general ML provider does such as Google, Amazon or IBM with their general API.
 
 ### Is this a flower
 
-I decided to use Clarifai services anyway for a single feature of the application I was going to build.
+I decided to use Clarifai services anyway for a single feature of the application.
 
 I used their [General Model](https://www.clarifai.com/models/general-image-recognition-model-aaa03c23b3724a16a56b629203edc62c) to predict if there was a "plant" or a "flower" in a user photo to prevent "wrong" images from getting in the queue for the real classification model.
 
-This reduced the possibility of users submitting images of people, cars or any other thing except the area of this application, making the app react faster when user took photos of anything other that than flowers.
+This reduced the possibility of users submitting images of people, cars or anything else outside the area of this application.
 
 ### Change of plan
 
@@ -130,7 +131,7 @@ I wanted to train and create different TensorFlow models.
 I choose two different sources:
 
 - Microsoft Cognitive Services [Custom Vision](http://customvision.ai/)
-- TensorFlow transfer learning through [retrain script](https://github.com/Giorat/pocketbotanist/blob/master/transfer_learning/retrain.py) from TensorFlow team executed on [flodyhub.com](https://flodyhub.com)
+- TensorFlow transfer learning through [retrain script](https://github.com/Giorat/pocketbotanist/blob/master/transfer_learning/retrain.py) from TensorFlow team executed on [Flodyhub](https://flodyhub.com)
 
 Both of those two sources outputted two really important files:
 
@@ -142,24 +143,24 @@ In the following two sections I'll evaluate each different method of training.
 **Custom Vision**
 ------------------
 
-I discovered this service while looking at possible API or services that enabled fast TensorFlow model training, with an export function.
-This web software let's users train a model in less than 10 minutes getting pretty accurate predictions on different kind of areas/subjects.
+I discovered this Microsoft service while looking at possible API or services that enabled fast TensorFlow model training, with an export function.
+This web software let's users train a model in less than 10 minutes getting accurate predictions on the inserted classes.
 
-Their output model need images to be translated from RGB color code to BGR(Blue-Green-Red) with a width X height of 227 pixels.
+Their output model need images to be translated from RGB color code to BGR(Blue-Green-Red) with a width and height of 227 pixels.
 
 **Training results**
 
-<img src="./img/colored_images1.jpg"  width="500"  />
+<img src="./img/colored_images1.jpg"  width="400"  />
 
 **Precision:** if a tag is predicted by your model, how likely is that to be right.
 
 **Recall:** out of the tags which should be predicted correctly, what percentage did your model correctly find.
 
-<img src="./img/colored_images2.jpg"  width="500"  />
+<img src="./img/colored_images2.jpg"  width="400"  />
 
 After studying the layout of the Frozen Model with TensorBoard, I was able to understand that Microsoft used SqueezeNet as base model to execute the transfer learning.
 
-I'm sure of this because there were a bunch of ["fire modules"](https://arxiv.org/abs/1602.07360v3) in it and the layout was the same as described in [this  article about SqueezeNet](https://medium.com/@smallfishbigsea/notes-of-squeezenet-4137d51feef4).
+I was almost sure of this because there were a bunch of ["fire modules"](https://arxiv.org/abs/1602.07360v3) in it and the layout was the same as described in [this  article about SqueezeNet](https://medium.com/@smallfishbigsea/notes-of-squeezenet-4137d51feef4).
 Essentially SqueezeNet is a model with AlexNet-level accuracy with 50x fewer parameters and a model size of just a few MB.
 
 **Model layout**<br/>
@@ -173,10 +174,12 @@ It provides user with a fast and quick workbench in the cloud to train models us
 
 I choose this service and not others such as Google Cloud services because with just one simple command I was able to start training a neural network with optimized TensorFlow kernel on my custom code and training dataset.
 
+The simple command was: `floyd run --cpu --env tensorflow 'python file.py'`
+
 I trained two different models using a script from the TensorFlow Team:
 
 - [Inception V3](https://arxiv.org/abs/1512.00567), one of the most famous model built in the last few years
-- [MobileNetV2](https://arxiv.org/abs/1801.04381), one of the new models type, focused on quick computations to run on mobile devices with a small footprint of the model (10 MB against 100 MB or more, such as Inception 80 MB, 8 times more )
+- [MobileNetV2](https://arxiv.org/abs/1801.04381), one of the new ones, focused on quick computations to run on mobile devices with a small footprint of the model (10 MB against 100 MB or more, such as Inception 80 MB, 8 times more )
 
 The setting for the transfer-learning training were:
 
@@ -206,7 +209,7 @@ The setting for the transfer-learning training were:
 
 The model layout shares the input and output parts as it can be seen here from a TensorBoard screenshot fo the Frozen Models.
 <p align="center">
-  <img src="./img/models_layout.jpg"  width="500"  />
+  <img src="./img/models_layout.jpg"  width="400"  />
 </p>
 
 The only different was the block after hub_input and before hub_output.
@@ -226,8 +229,6 @@ Having used two sources for the models I merged the different steps to evaluate 
 - [official TensorFlow image label script after transfer learning](https://github.com/tensorflow/tensorflow/blob/master/tensorflow/examples/label_image/label_image.py), image resized to smaller resolution then converted using TensorFlow image functions.
 
 I then used the resulting code from the merge of both script in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-TensorFlow.ipynb).
-
-**!! WARNING !!** This notebook has a size of 85 MB because it contains all the results from the models with the mismatched images of the flowers, used to get the results for the next section.
 
 <div class="pagebreak"> </div>
 
@@ -300,7 +301,7 @@ In the final application I disabled this feature because I got wrong predictions
 I have tested if removing colors from images might lead to a better or worst model.
 I trained it using again Custom Vision and this where the results I got.
 
-<img src="./img/black_and_white.jpg"  width="500"  />
+<img src="./img/black_and_white.jpg"  width="400"  />
 
 They were 5/6% less accurate both in precision and in recall than the colored version model.
 
@@ -308,7 +309,7 @@ My conclusion is that even if colors might introduce some bias they are really h
 
 For example, the training dataset provided different kind of rose colors even if it's common to see roses only as red, this enabled the model to recognize different kind of roses without being fooled by saying that anything red like a rose might be more probable to be a rose.
 
-<div class="pagebreak"> </div>
+<br/>
 
 ## User Application
 
@@ -341,7 +342,7 @@ To sum up for each user photo, the app will take 2 seconds to understand if ther
 
 As I already said I disabled the possibility to use local TensorFlow in the browser until the imported model are going to be fixed in the tfjs-converter.
 
-<div class="pagebreak"> </div>
+<br/>
 
 ## Learning and thoughts
 
@@ -349,9 +350,9 @@ As I already said I disabled the possibility to use local TensorFlow in the brow
 
 Using services such as custom-vision enabled a really high abstraction, even more than libraries such as Keras or TensorFlow Hub are useful but lack of the possibility to create quick experiments easily for everyone.
 
-I also discovered similar services to custom-vision such as [Lobe](https://lobe.ai/) or [Automl](https://cloud.google.com/automl/), still closed to the open public, are going to enable greater experiences lowering the required entry level of knowledge to start working with Machine Learning models.
+I also discovered similar services to custom-vision such as [Lobe](https://lobe.ai/) or [AutoML](https://cloud.google.com/automl/), still closed to the open public, are going to enable greater experiences lowering the required entry level of knowledge to start working with Machine Learning models.
 
-> "If AI really is going to change the world, then it seems obvious that the more people who get involved, the better — especially people outside the tech world." <cite> Mike Matas - co-founder of Lobe</cite>
+> "If AI really is going to change the world, then it seems obvious that the more people who get involved, the better — **especially people outside the tech world**." <cite> Mike Matas - co-founder of Lobe</cite>
 
 Here's the link to a full [Lobe review](https://www.theverge.com/2018/6/12/17452742/deep-learning-ai-learn-lobe-made-easy-coding) by The Verge.
 
@@ -369,8 +370,6 @@ My thought is that even if humans might be less precise we tend to not do really
 
 I have been thinking about Judea phrase and I started pondering about if teaching "Cause" and "Effect" might be even the to solution to teach a machine to recognize flowers.
 
-I also want to reflect on the association of "Cause" and "Effect" with stories we create or tell everyday.
-
 Let me explain if a children points a dandelion and ask you what's its name, you'll probably tell the answer but you won't stop there.
 You might show them how a dandelion reacts when you blow some air on it. By doing that the children will be interested and curios, probably trying to imitate you as soon as possible looking at other plant trying to find another dandelion.
 
@@ -382,16 +381,18 @@ A machine might be built to be curious as a children, trying to recognize differ
 
 ### Conclusion
 
-In summary, I was able to train a visual ML model using two different ways, choosing the Microsoft Custom Vision as the final one, running the exported TensorFlow model on a serverless services known as Algorithmia then I created a modern web application enabling users to get flower names just by taking a photo with their smartphones.
+I was able to train a visual ML model using two different ways, choosing the Microsoft Custom Vision as the final one, running the exported TensorFlow model on a serverless services known as Algorithmia then I created a modern web application enabling users to get flower names just by taking a photo with their smartphones.
 
 The final TensorFlow model had a Top-1 precision of 52% and Top-5 precision of 98%, due to the fact that the testing dataset was too small to prove the full capability of it.
 
-![tesla over research](https://petewarden.files.wordpress.com/2018/05/sleep_lost1.jpg?w=768)
+<img alt="tesla over research" src="
+./img/sleep_lost.jpg"  width="500"  />
+
 
 > "Why you need to improve your training/test dataset"
 > <cite> by [Pete Warden](https://twitter.com/petewarden) from this [article](https://petewarden.com/2018/05/28/why-you-need-to-improve-your-training-data-and-how-to-do-it/) </cite>
 
-If I had one more week I would have increased the testing dataset size 5 times more, in fact I tested out a smaller version of Tulip dataset with 100 new images always from Instagram getting Top-1 of 48% and a Top-5 of 93%, whereas the previous test got only Topi-1 of 30% and Top-5 of 90%.
+If I had one more week I would have increased the testing dataset 5 times more to increase accuracy of the results.
+To prove this I tested out a smaller version of Tulip testing dataset with 100 new images always from Instagram getting Top-1 of 48% and a Top-5 of 93%, whereas the previous test got only Topi-1 of 30% and Top-5 of 90% on the dandelion class alone.
 
 This final test was completed in [this jupyter notebook](https://github.com/Giorat/pocketbotanist/blob/master/python/testing-more-tulip.ipynb).
-
