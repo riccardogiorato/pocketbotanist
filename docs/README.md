@@ -10,6 +10,7 @@
 <h3 align="center">
     Riccardo Emanuele Giorato - 1122158<br/><br/>
    Cognitive Services - Project type 2<br/><br/>
+   University of Padova<br/><br/>
     Academic Year: 2017-2018
 </h3>
 
@@ -176,10 +177,12 @@ I choose this service and not others such as Google Cloud services because with 
 
 The simple command was: `floyd run --cpu --env tensorflow 'python file.py'`
 
-I trained two different models using a script from the TensorFlow Team:
+I trained two different models using [this script](https://github.com/Giorat/pocketbotanist/blob/master/transfer_learning/retrain.py) from the TensorFlow Team modified by myself to run on Floydhub:
 
 - [Inception V3](https://arxiv.org/abs/1512.00567), one of the most famous model built in the last few years
-- [MobileNetV2](https://arxiv.org/abs/1801.04381), one of the new ones, focused on quick computations to run on mobile devices with a small footprint of the model (10 MB against 100 MB or more, such as Inception 80 MB, 8 times more )
+- [MobileNetV2](https://arxiv.org/abs/1801.04381), one of the new ones, focused on quick computations to run on mobile devices with a small footprint of the model (10 MB against 100 MB or more, such as Inception 80 MB, 8 times more ).
+
+It also added a softmax and fully-connected layer to the model to test and train the new classes.
 
 The setting for the transfer-learning training were:
 
@@ -209,7 +212,7 @@ The setting for the transfer-learning training were:
 
 The model layout shares the input and output parts as it can be seen here from a TensorBoard screenshot fo the Frozen Models.
 <p align="center">
-  <img src="./img/models_layout.jpg"  width="400"  />
+  <img src="./img/models_layout.jpg"  width="350"  />
 </p>
 
 The only different was the block after hub_input and before hub_output.
@@ -320,8 +323,9 @@ I choose [Vue.js](https://vuejs.org/), one of the current most famous open-sourc
 I developed the entire application as a Single Page Application([SPA](https://en.wikipedia.org/wiki/Single-page_application)), the app interacts with the user by dynamically changing the current page rather than loading entire new pages from a backend server. I also added various modules to help me out building it such as [vue-material](https://vuematerial.io/) to develop the UI and UX more easily.
 
 **Pre-processing image**
-One step really important in the evaluation of images by the TensorFlow model was the pre-processing of images, resizing them down to width and height equals to the network input size and even changing the order or color value array for custom-vision from RGB to BGR.
-I decided to remove the python code from the backend function to reduce the cloud execution time, doing those steps on device with the help of HTML5 Canvas, as it can seen in the functions [here](https://github.com/Giorat/pocketbotanist/blob/master/js/src/components/AnalyzePhoto.vue#L144) with the functions:
+There's one step really important in the evaluation of images by the TensorFlow model, the pre-processing of images.
+The code need to resize them down to width and height equals to the network input size and even changing the order or color value array for custom-vision from RGB to BGR.
+I decided to remove the python code from the backend function to reduce the Cloud execution time, doing those steps on device with the help of HTML5 Canvas, as it can seen in the functions [here](https://github.com/Giorat/pocketbotanist/blob/master/js/src/components/AnalyzePhoto.vue#L144) with the functions:
 
 - resizeImg256
 - cropcenter
@@ -373,9 +377,7 @@ I have been thinking about Judea phrase and I started pondering about if teachin
 Let me explain if a children points a dandelion and ask you what's its name, you'll probably tell the answer but you won't stop there.
 You might show them how a dandelion reacts when you blow some air on it. By doing that the children will be interested and curios, probably trying to imitate you as soon as possible looking at other plant trying to find another dandelion.
 
-To sum up we tend to give children examples but we also provide interesting stories with cause and effect.
-
-Many of those stories will disappear from our memory but some of them won't go away probably because there's the [proved link](https://en.wikipedia.org/wiki/Emotion_and_memory) between emotions and memory.
+To sum up we tend to give children examples but we also provide interesting stories with cause and effect. Many of those stories will disappear from our memory but some of them won't go away probably because there's the [proved link](https://en.wikipedia.org/wiki/Emotion_and_memory) between emotions and memory.
 
 A machine might be built to be curious as a children, trying to recognize different object also by recalling some "interesting" stories from its memories.
 
@@ -385,9 +387,7 @@ I was able to train a visual ML model using two different ways, choosing the Mic
 
 The final TensorFlow model had a Top-1 precision of 52% and Top-5 precision of 98%, due to the fact that the testing dataset was too small to prove the full capability of it.
 
-<img alt="tesla over research" src="
-./img/sleep_lost.jpg"  width="500"  />
-
+<img alt="tesla over research" src="./img/sleep_lost.jpg"  width="400"  />
 
 > "Why you need to improve your training/test dataset"
 > <cite> by [Pete Warden](https://twitter.com/petewarden) from this [article](https://petewarden.com/2018/05/28/why-you-need-to-improve-your-training-data-and-how-to-do-it/) </cite>
