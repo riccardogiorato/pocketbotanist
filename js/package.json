@@ -11,13 +11,13 @@
   },
   "scripts": {
     "start": "parcel src/index.html --no-hmr --open --hmr-hostname 192.168.1.66 --https  --no-cache",
-    "build": "parcel build src/index.html -d public --public-url ./",
+    "build": "parcel build src/index.html -d public --public-url ./ --log-level 3",
     "clean": "RMDIR  dist /S /Q && RMDIR  public /S /Q && RMDIR  .cache /S /Q"
   },
   "dependencies": {
-    "@tensorflow/tfjs": "0.11.2",
+    "@tensorflow/tfjs": "0.11.7",
     "clarifai": "^2.7.1",
-    "parcel-bundler": "~1.9.0",
+    "parcel-bundler": "~1.9.2",
     "vue": "^2.5.16",
     "vue-material": "^1.0.0-beta-10.2",
     "vue-router": "^3.0.1"

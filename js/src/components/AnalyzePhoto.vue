@@ -52,12 +52,13 @@ export default {
 
           this.progress = 80;
 
-          //this.flowerClass = await this.predictLocalTensorflow(BGRImage);
-          /*console.log(
+          this.flowerClass = await this.predictLocalTensorflow(BGRImage);
+
+          console.log(
             'tensorflow local',
             this.flowerClass.label,
             this.flowerClass.value
-          );*/
+          );
 
           this.progress = 100;
 
@@ -109,10 +110,9 @@ export default {
       const pixels = fromPixels(img);
 
       let result = tensorflow.predict(pixels);
-
-      const topK = tensorflow.getTopKClasses(result, 5);
-
-      tensorflow.dispose();
+      const topK = tensorflow.getTopKClasses(result, 7);
+      console.dir(topK);
+      //tensorflow.dispose();
       return topK[0];
     },
 
