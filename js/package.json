@@ -27,7 +27,7 @@
     "@vue/component-compiler-utils": "^1.0.0",
     "vue-template-compiler": "^2.5.16",
     "vue-hot-reload-api": "^2.3.0",
-    "node-sass": "^4.9.0",
+    "node-sass": "^4.9.2",
     "parcel-plugin-bundle-visualiser": "^1.1.2"
   }
 }
