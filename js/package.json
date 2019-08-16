@@ -16,7 +16,7 @@
   },
   "dependencies": {
     "@tensorflow/tfjs": "0.11.7",
-    "clarifai": "^2.7.1",
+    "clarifai": "^2.9.1",
     "parcel-bundler": "~1.9.5",
     "vue": "^2.5.16",
     "vue-material": "^1.0.0-beta-10.2",
